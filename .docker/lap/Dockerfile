@@ -42,9 +42,9 @@ EXPOSE 443
 #RUN mkdir /etc/apache2/ssl && mkdir /etc/apache2/ssl/private
 #RUN chmod 755 /etc/apache2/ssl
 #RUN chmod 710 /etc/apache2/ssl/private
-#ADD certs/_.tourknife.com_private_key.key /etc/apache2/ssl/private
-#ADD certs/tourknife.com_ssl_certificate.cer /etc/apache2/ssl
-#ADD certs/-.tourknife.com_ssl_certificate_INTERMEDIATE.cer /etc/apache2/ssl
+#ADD certs/_.plademar.com_private_key.key /etc/apache2/ssl/private
+#ADD certs/plademar.com_ssl_certificate.cer /etc/apache2/ssl
+#ADD certs/-.plademar.com_ssl_certificate_INTERMEDIATE.cer /etc/apache2/ssl
 #RUN chown -R root:root /etc/apache2/ssl
 #RUN chown -R root:ssl-cert /etc/apache2/ssl/private
 
