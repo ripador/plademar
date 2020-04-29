@@ -1,0 +1,5 @@
+<div id="{% if id is defined %}{{ id }}{% else %}response{% endif %}" class="response alert {% if level is defined %}{{ level }}{% endif %}">
+  {% if message is defined %}
+    {{ message }}
+  {% endif %}
+</div>

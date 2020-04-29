@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Complete the numeric series{% endtrans %}{% endblock %}
+
+{% block body %}
+  <div class="container">
+
+    {# Breadcrumb #}
+    {% include 'default/_breadcrumb.html.twig' with {
+      links: {
+        ('Home'|trans): path('homepage'),
+        ('Maths'|trans): '#',
+      },
+      active: 'Series'|trans
+    } %}
+
+    <div class="row">
+      <div class="col">
+        {% form_theme levelForm 'bootstrap_4_horizontal_layout.html.twig' %}
+        {{ form_start(levelForm) }}
+        {{ form_widget(levelForm) }}
+
+        <div class="actions">
+          <button type="submit" class="btn btn-secondary">{% trans %}Play{% endtrans %}</button>
+        </div>
+
+        {{ form_end(levelForm) }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        lorem ipsum
+      </div>
+    </div>
+  </div>
+{% endblock %}

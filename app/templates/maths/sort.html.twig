@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Sort the numbers{% endtrans %}{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+  <style type="text/css">
+    #sortable {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      width: 450px;
+    }
+    #sortable li {
+      margin: 3px 3px 3px 0;
+      padding: 1px;
+      float: left;
+      width: 100px;
+      height: 90px;
+      font-size: 4em;
+      text-align: center;
+      cursor: crosshair;
+    }
+  </style>
+{% endblock %}
+
+
+{% block body %}
+  <div class="container">
+
+    {# Breadcrumb #}
+    {% include 'default/_breadcrumb.html.twig' with {
+      links: {
+        ('Home'|trans): path('homepage'),
+        ('Maths'|trans): '#',
+      },
+      active: 'Sort'|trans
+    } %}
+
+    <div class="row">
+      <div class="col">
+        {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+        <div class="actions">
+          <button type="submit" class="btn btn-secondary">{% trans %}Play{% endtrans %}</button>
+        </div>
+
+        {{ form_end(form) }}
+      </div>
+    </div>
+
+    {% if numbers|length > 0 %}
+      <div class="row">
+        <div class="col">
+          <p>{% trans %}Sort the numbers from least to highest{% endtrans %}</p>
+
+          <ul id="sortable">
+            {% for n in numbers %}
+              <li class="ui-state-default" data-value="{{ n }}">{{ n }}</li>
+            {% endfor %}
+          </ul>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button type="button" id="check" class="btn btn-primary">{% trans %}Check{% endtrans %}</button>
+        </div>
+      </div>
+    {% endif %}
+
+    {% include 'default/_response.html.twig' with {
+      id: 'ok',
+      level: 'alert-success',
+      message: 'Well done'|trans
+    } %}
+
+    {% include 'default/_response.html.twig' with {
+      id: 'ko',
+      level: 'alert-danger',
+      message: 'Try again'|trans
+    } %}
+
+  </div>
+{% endblock %}
+
+
+{% block page_js %}
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="{{ asset('assets/js/sort.js') }}"></script>
+{% endblock %}
