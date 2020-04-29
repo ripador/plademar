@@ -9,3 +9,6 @@ I've prepared a Docker container with system requirements. You can build and run
     docker-compose up -d
     
 Use the `--build` option if you make changes in the Dockerfile after the first build.
+
+## Symfony 5
+The app folder contains the Symfony code and main application.
