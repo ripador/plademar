@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col">
+    {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <div class="actions">
+      <button type="submit" class="btn btn-secondary">{% trans %}Play{% endtrans %}</button>
+    </div>
+
+    {{ form_end(form) }}
+  </div>
+</div>
