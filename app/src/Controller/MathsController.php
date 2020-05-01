@@ -105,8 +105,11 @@ class MathsController extends AbstractController
                 'label'   => 'Difficulty level',
                 'choices' => $choices
             ])->getForm();
-
         $levelForm->handleRequest($request);
+
+        $form = $this->createForm(SerieType::class);
+        $form->handleRequest($request);
+
         if ($levelForm->isSubmitted() && $levelForm->isValid()) {
             $d = $levelForm->getData()['difficult'];
 
@@ -125,6 +128,19 @@ class MathsController extends AbstractController
             }
 
             $form = $this->createForm(SerieType::class, ['serie' => $list, 'gaps' => json_encode($gaps)]);
+
+        } elseif ($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            $serie = $formData['serie'];
+            $gaps = json_decode($formData['gaps']);
+
+            $pass = true;
+            foreach ($gaps as $k => $v) {
+                if ($serie[$k] != $v) {
+                    $pass = false;
+                    break;
+                }
+            }
         }
 
         return $this->render('maths/series.html.twig', [
@@ -132,6 +148,7 @@ class MathsController extends AbstractController
             'serie' => $serie ?? null,
             'gaps' => $gaps ?? null,
             'form' => isset($form) ? $form->createView() : null,
+            'pass' => isset($pass) ? $pass : null,
         ]);
     }
 }

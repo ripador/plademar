@@ -14,7 +14,8 @@ class SerieType extends AbstractType
     {
         $builder
             ->add('serie', CollectionType::class, [
-                'entry_type' => NumberType::class
+                'entry_type' => NumberType::class,
+                'allow_add' => true
             ])
             ->add('gaps', HiddenType::class)
         ;

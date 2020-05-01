@@ -20,9 +20,6 @@
       <div class="row">
         <div class="col">
 
-          {{ dump(serie) }}
-          {{ dump(gaps) }}
-
           {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
           {{ form_start(form) }}
           {{ form_widget(form) }}
@@ -35,6 +32,27 @@
 
         </div>
       </div>
+
+      {% if pass is same as(null) %}
+        {% trans %}Fill the blank gaps with the numbers to complete the serie{% endtrans %}
+
+      {% else %}
+        {% if pass %}
+          {% include 'default/_response.html.twig' with {
+            id: 'ok',
+            level: 'alert-success',
+            message: 'Well done'|trans
+          } %}
+
+        {% else %}
+          {% include 'default/_response.html.twig' with {
+            id: 'ko',
+            level: 'alert-danger',
+            message: 'Try again'|trans
+          } %}
+
+        {% endif %}
+      {% endif %}
     {% endif %}
   </div>
 {% endblock %}
