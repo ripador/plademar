@@ -30,9 +30,13 @@ class MathsController extends AbstractController
          *
          * If you define a max < rows*4 the page will not load. */
         $levels = [
-            ['max' => 12, 'rows' => 1, 'name' => 'Easy'],
-            ['max' => 30, 'rows' => 2, 'name' => 'Medium'],
-            ['max' => 99, 'rows' => 3, 'name' => 'Hard'],
+            ['name' => '1', 'length' => 3, 'min' => 0, 'max' => 9],
+            ['name' => '2', 'length' => 4, 'min' => 0, 'max' => 20],
+            ['name' => '3', 'length' => 6, 'min' => 0, 'max' => 100],
+            ['name' => '4', 'length' => 8, 'min' => 0, 'max' => 1000],
+            ['name' => '5', 'length' => 8, 'min' => 1000, 'max' => 9999],
+            ['name' => '6', 'length' => 8, 'min' => 10000, 'max' => 99999],
+            ['name' => '7', 'length' => 8, 'min' => 990000, 'max' => 999999],
         ];
         $choices = $this->getChoicesFromLevels($levels);
 
@@ -48,18 +52,9 @@ class MathsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $d = $form->getData()['difficult'];
 
-            $max = $levels[$d]['max'];
-            $rows = $levels[$d]['rows'];
-
-            do {
-                $ran_num = rand(1, $max);
-                if (!in_array($ran_num, $number_array)) {
-                    $number_array[] = $ran_num;
-                }
-            } while (count($number_array) < (4 * $rows));
-
-            //get the elements in random order
-            shuffle($number_array);
+            $mathsService = new Maths();
+            $number_array = $mathsService->generateRandomList($levels[$d]['length'], $levels[$d]['min'],
+                $levels[$d]['max'], true);
         }
 
         return $this->render('maths/sort.html.twig', [

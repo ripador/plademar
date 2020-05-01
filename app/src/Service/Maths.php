@@ -4,6 +4,33 @@ namespace App\Service;
 class Maths
 {
     /**
+     * generateRandomList.
+     * Returns
+     * @param int $length Lenght of the random array
+     * @param int $min Lowest number that can appear
+     * @param int $max Highest number that can appear
+     * @param bool $shuffle If true shuffle the array before returning
+     * @return array
+     */
+    public function generateRandomList($length, $min, $max, $shuffle = false) : array
+    {
+        $number_array = [];
+        do {
+            $ran_num = rand($min, $max);
+            if (!in_array($ran_num, $number_array)) {
+                $number_array[] = $ran_num;
+            }
+        } while (count($number_array) < $length);
+
+        //get the elements in random order
+        if ($shuffle) {
+            shuffle($number_array);
+        }
+
+        return $number_array;
+    }
+
+    /**
      * generateSerie.
      *
      * @param int $ini Initial number
