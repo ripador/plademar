@@ -30,3 +30,11 @@ $(function() {
         }
     });
 });
+
+$(document).ready(function() {
+    /* Change the numbers size depending on the level */
+    let lvl = $('#form_difficult').val();
+    if (lvl >= 6) {
+        $('#sortable li').css('font-size', '1em');
+    }
+});
