@@ -14,24 +14,45 @@
       active: 'Series'|trans
     } %}
 
-    <div class="row">
-      <div class="col">
-        {% form_theme levelForm 'bootstrap_4_horizontal_layout.html.twig' %}
-        {{ form_start(levelForm) }}
-        {{ form_widget(levelForm) }}
+    {% include 'maths/_level_form.html.twig' with { 'form': levelForm } %}
 
-        <div class="actions">
-          <button type="submit" class="btn btn-secondary">{% trans %}Play{% endtrans %}</button>
+    {% if serie %}
+      <div class="row">
+        <div class="col">
+
+          {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+          {{ form_start(form) }}
+          {{ form_widget(form) }}
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">{% trans %}Check{% endtrans %}</button>
+          </div>
+
+          {{ form_end(form) }}
+
         </div>
-
-        {{ form_end(levelForm) }}
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col">
-        lorem ipsum
-      </div>
-    </div>
+      {% if pass is same as(null) %}
+        {% trans %}Fill the blank gaps with the numbers to complete the serie{% endtrans %}
+
+      {% else %}
+        {% if pass %}
+          {% include 'default/_response.html.twig' with {
+            id: 'ok',
+            level: 'alert-success',
+            message: 'Well done'|trans
+          } %}
+
+        {% else %}
+          {% include 'default/_response.html.twig' with {
+            id: 'ko',
+            level: 'alert-danger',
+            message: 'Try again'|trans
+          } %}
+
+        {% endif %}
+      {% endif %}
+    {% endif %}
   </div>
 {% endblock %}

@@ -1,11 +1,13 @@
 <?php
 namespace App\Controller;
 
+use App\Form\SerieType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\Maths;
 
 /**
  * Class MathsController
@@ -62,7 +64,7 @@ class MathsController extends AbstractController
 
         return $this->render('maths/sort.html.twig', [
             'numbers' => $number_array,
-            'form'    => $form->createView()
+            'levelForm' => $form->createView()
         ]);
     }
 
@@ -84,6 +86,7 @@ class MathsController extends AbstractController
 
     /**
      * series.
+     * Generate random numeric series that students have to complete.
      *
      * @Route("/series", name="maths_series")
      * @param Request $request
@@ -92,9 +95,9 @@ class MathsController extends AbstractController
     public function series(Request $request)
     {
         $levels = [
-            ['name' => 'Easy', 'max' => 9],
-            ['name' => 'Medium', 'max' => 99],
-            ['name' => 'Hard', 'max' => 999],
+            ['name' => 'Easy',   'length' => 3,  'gaps' => 1, 'lowest' => 1, 'highest' => 6,   'steps' => [1]],
+            ['name' => 'Medium', 'length' => 6,  'gaps' => 2, 'lowest' => 0, 'highest' => 99,  'steps' => [2, 4, 5]],
+            ['name' => 'Hard',   'length' => 10, 'gaps' => 4, 'lowest' => 0, 'highest' => 999, 'steps' => [3, 5, 10]],
         ];
         $choices = $this->getChoicesFromLevels($levels);
         $levelForm = $this->createFormBuilder()
@@ -102,16 +105,50 @@ class MathsController extends AbstractController
                 'label'   => 'Difficulty level',
                 'choices' => $choices
             ])->getForm();
-
         $levelForm->handleRequest($request);
+
+        $form = $this->createForm(SerieType::class);
+        $form->handleRequest($request);
+
         if ($levelForm->isSubmitted() && $levelForm->isValid()) {
             $d = $levelForm->getData()['difficult'];
 
+            // Generate the numeric serie
+            $ini = rand($levels[$d]['lowest'], $levels[$d]['highest']);
+            $length = $levels[$d]['length'];
+            $step = array_rand($levels[$d]['steps']);
 
+            $mathsService = new Maths();
+            $serie = $mathsService->generateSerie($ini, $length, $levels[$d]['steps'][$step]);
+            $gaps = $mathsService->generateGaps($serie, $levels[$d]['gaps']);
+
+            $list = [];
+            foreach ($serie as $k => $v) {
+                $list[$k] = array_key_exists($k, $gaps) ? null : $v;
+            }
+
+            $form = $this->createForm(SerieType::class, ['serie' => $list, 'gaps' => json_encode($gaps)]);
+
+        } elseif ($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            $serie = $formData['serie'];
+            $gaps = json_decode($formData['gaps']);
+
+            $pass = true;
+            foreach ($gaps as $k => $v) {
+                if ($serie[$k] != $v) {
+                    $pass = false;
+                    break;
+                }
+            }
         }
 
         return $this->render('maths/series.html.twig', [
-            'levelForm'    => $levelForm->createView()
+            'levelForm' => $levelForm->createView(),
+            'serie' => $serie ?? null,
+            'gaps' => $gaps ?? null,
+            'form' => isset($form) ? $form->createView() : null,
+            'pass' => isset($pass) ? $pass : null,
         ]);
     }
 }
