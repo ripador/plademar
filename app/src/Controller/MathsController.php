@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use AppBundle\Form\NumberListType;
+use App\Form\SerieType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -124,7 +124,7 @@ class MathsController extends AbstractController
                 $list[$k] = array_key_exists($k, $gaps) ? null : $v;
             }
 
-            $form = $this->createForm(NumberListType::class, ['list' => $list]);
+            $form = $this->createForm(SerieType::class, ['serie' => $list, 'gaps' => json_encode($gaps)]);
         }
 
         return $this->render('maths/series.html.twig', [
