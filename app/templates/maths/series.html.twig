@@ -14,24 +14,28 @@
       active: 'Series'|trans
     } %}
 
-    <div class="row">
-      <div class="col">
-        {% form_theme levelForm 'bootstrap_4_horizontal_layout.html.twig' %}
-        {{ form_start(levelForm) }}
-        {{ form_widget(levelForm) }}
+    {% include 'maths/_level_form.html.twig' with { 'form': levelForm } %}
 
-        <div class="actions">
-          <button type="submit" class="btn btn-secondary">{% trans %}Play{% endtrans %}</button>
+    {% if serie %}
+      <div class="row">
+        <div class="col">
+
+          {{ dump(serie) }}
+          {{ dump(gaps) }}
+
+          {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+          {{ form_start(form) }}
+          {{ form_widget(form) }}
+
+          <div class="actions">
+            <button type="submit" class="btn btn-secondary">{% trans %}Check{% endtrans %}</button>
+          </div>
+
+          {{ form_end(form) }}
+
+
         </div>
-
-        {{ form_end(levelForm) }}
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        lorem ipsum
-      </div>
-    </div>
+    {% endif %}
   </div>
 {% endblock %}
