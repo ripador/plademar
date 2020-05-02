@@ -15,7 +15,7 @@ $(function() {
             let obj = $(this);
             let val = parseInt(obj.attr('data-value'));
 
-            if (stop == false && val < ant) {
+            if (stop === false && val < ant) {
                 //updateResponse("EL NÚMERO " + val + " ESTÀ A LA POSICIÓ " + pos, false);
                 $('#ko').show();
                 stop = true;
@@ -24,7 +24,7 @@ $(function() {
             ant = val;
         });
 
-        if (stop == false) {
+        if (stop === false) {
             //updateResponse("MOLT BÉ", true);
             $('#ok').show();
         }

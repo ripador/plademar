@@ -9,11 +9,19 @@ Index: Índice
 Maths: Matemáticas
 Languages: Idiomas
 'Sort the numbers from least to highest': 'Ordena los números de menor a mayor'
-Check: Comprobar
-'Well done': 'Muy bien'
-'Try again': 'Inténtalo de nuevo'
 Sums: Sumas
 Sum: Suma
 Operands: Operadores
 Result: Resultado
 Reset: Reiniciar
+
+resolve:
+  check: comprobar
+  ok: 'Muy bien'
+  ko: 'Inténtalo de nuevo'
+
+maths:
+  series:
+    series: series
+    title: Complata las series numéricas
+    fill_gaps: Rellena los espacios vacíos con números para completar la serie

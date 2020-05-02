@@ -1,0 +1,13 @@
+resolve:
+  check: check
+  ok: 'Well done'
+  ko: 'Try again'
+
+maths:
+  sort:
+    sort: sort
+    title: 'Ordena els nombres de més petit a més gran'
+  series:
+    series: Series
+    title: Complete the numeric series
+    fill_gaps: 'Fill the blank gaps with the numbers to complete the serie'

@@ -9,14 +9,23 @@ Index: Índex
 Maths: 'Matemàtiques'
 Languages: Idiomes
 'Sort the numbers from least to highest': 'Ordena els nombres de més petit a més gran'
-Check: Comprobar
-'Well done': 'Molt bé'
-'Try again': 'Torna a probar'
 Sums: Sumes
 Sum: Suma
 Result: Resultat
 Reset: Reiniciar
 Sort the numbers: Ordena els nombres
-Complete the numeric series: Completa les séries numériques
 Hello: Hola
-Series: Series
+
+resolve:
+  check: comprobar
+  ok: 'Molt bé'
+  ko: 'Torna a probar'
+
+maths:
+  sort:
+    sort: sort
+    title: 'Ordena els nombres de més petit a més gran'
+  series:
+    series: series
+    title: Completa les séries numériques
+    fill_gaps: 'Omple els buits amb els nombres que requereix la serie'

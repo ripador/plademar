@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans %}Complete the numeric series{% endtrans %}{% endblock %}
+{% block title %}{% trans %}maths.series.title{% endtrans %}{% endblock %}
 
 {% block body %}
   <div class="container">
@@ -9,9 +9,9 @@
     {% include 'default/_breadcrumb.html.twig' with {
       links: {
         ('Home'|trans): path('homepage'),
-        ('Maths'|trans): '#',
+        ('Maths'|trans|capitalize): '#',
       },
-      active: 'Series'|trans
+      active: 'maths.series.series'|trans
     } %}
 
     {% include 'maths/_level_form.html.twig' with { 'form': levelForm } %}
@@ -25,7 +25,7 @@
           {{ form_widget(form) }}
 
           <div class="actions">
-            <button type="submit" class="btn btn-primary">{% trans %}Check{% endtrans %}</button>
+            <button type="submit" class="btn btn-primary">{{ 'resolve.check'|trans|capitalize }}</button>
           </div>
 
           {{ form_end(form) }}
@@ -34,21 +34,21 @@
       </div>
 
       {% if pass is same as(null) %}
-        {% trans %}Fill the blank gaps with the numbers to complete the serie{% endtrans %}
+        {% trans %}maths.series.fill_gaps{% endtrans %}
 
       {% else %}
         {% if pass %}
           {% include 'default/_response.html.twig' with {
             id: 'ok',
             level: 'alert-success',
-            message: 'Well done'|trans
+            message: 'resolve.ok'|trans
           } %}
 
         {% else %}
           {% include 'default/_response.html.twig' with {
             id: 'ko',
             level: 'alert-danger',
-            message: 'Try again'|trans
+            message: 'resolve.ko'|trans
           } %}
 
         {% endif %}
