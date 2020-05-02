@@ -11,4 +11,4 @@ I've prepared a Docker container with system requirements. You can build and run
 Use the `--build` option if you make changes in the Dockerfile after the first build.
 
 ## Symfony 5
-The '/app' folder contains the main application written in Symfony.
+The `/app` folder contains the main application written in Symfony.
