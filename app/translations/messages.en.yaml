@@ -6,7 +6,8 @@ resolve:
 maths:
   sort:
     sort: sort
-    title: 'Ordena els nombres de més petit a més gran'
+    title: 'Sort the numbers'
+    explanation: 'Ordena els nombres de més petit a més gran'
   series:
     series: Series
     title: Complete the numeric series

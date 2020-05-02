@@ -8,7 +8,6 @@ Play: Jugar
 Index: Índice
 Maths: Matemáticas
 Languages: Idiomas
-'Sort the numbers from least to highest': 'Ordena los números de menor a mayor'
 Sums: Sumas
 Sum: Suma
 Operands: Operadores
@@ -21,6 +20,10 @@ resolve:
   ko: 'Inténtalo de nuevo'
 
 maths:
+  sort:
+    sort: ordenar
+    title: Ordena los números
+    explanation: 'Ordena los números de menor a mayor'
   series:
     series: series
     title: Complata las series numéricas

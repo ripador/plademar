@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans %}Sort the numbers{% endtrans %}{% endblock %}
+{% block title %}{% trans %}maths.sort.title{% endtrans %}{% endblock %}
 
 {% block page_css %}
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
@@ -35,7 +35,7 @@
         ('Home'|trans): path('homepage'),
         ('Maths'|trans): '#',
       },
-      active: 'Sort'|trans
+      active: 'maths.sort.sort'|trans|capitalize
     } %}
 
     {% include 'maths/_level_form.html.twig' with { 'form': levelForm } %}
@@ -43,7 +43,7 @@
     {% if numbers|length > 0 %}
       <div class="row">
         <div class="col">
-          <p>{% trans %}Sort the numbers from least to highest{% endtrans %}</p>
+          <p>{% trans %}maths.sort.explanation{% endtrans %}</p>
 
           <ul id="sortable">
             {% for n in numbers %}
@@ -55,7 +55,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <button type="button" id="check" class="btn btn-primary">{% trans %}Check{% endtrans %}</button>
+          <button type="button" id="check" class="btn btn-primary">{% trans %}resolve.check{% endtrans %}</button>
         </div>
       </div>
     {% endif %}
@@ -63,13 +63,13 @@
     {% include 'default/_response.html.twig' with {
       id: 'ok',
       level: 'alert-success',
-      message: 'Well done'|trans
+      message: 'resolve.ok'|trans
     } %}
 
     {% include 'default/_response.html.twig' with {
       id: 'ko',
       level: 'alert-danger',
-      message: 'Try again'|trans
+      message: 'resolve.ko'|trans
     } %}
 
   </div>

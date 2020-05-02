@@ -8,12 +8,10 @@ Play: Jugar
 Index: Índex
 Maths: 'Matemàtiques'
 Languages: Idiomes
-'Sort the numbers from least to highest': 'Ordena els nombres de més petit a més gran'
 Sums: Sumes
 Sum: Suma
 Result: Resultat
 Reset: Reiniciar
-Sort the numbers: Ordena els nombres
 Hello: Hola
 
 resolve:
@@ -23,8 +21,9 @@ resolve:
 
 maths:
   sort:
-    sort: sort
-    title: 'Ordena els nombres de més petit a més gran'
+    sort: ordenar
+    title: Ordena els nombres
+    explanation: 'Ordena els nombres de més petit a més gran'
   series:
     series: series
     title: Completa les séries numériques
