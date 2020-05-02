@@ -27,4 +27,4 @@ maths:
   series:
     series: series
     title: Completa les séries numériques
-    fill_gaps: 'Omple els buits amb els nombres que requereix la serie'
+    explanation: 'Omple els buits amb els nombres que requereix la serie'

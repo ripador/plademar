@@ -27,4 +27,4 @@ maths:
   series:
     series: series
     title: Complata las series numéricas
-    fill_gaps: Rellena los espacios vacíos con números para completar la serie
+    explanation: Rellena los espacios vacíos con números para completar la serie

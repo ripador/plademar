@@ -11,4 +11,4 @@ maths:
   series:
     series: Series
     title: Complete the numeric series
-    fill_gaps: 'Fill the blank gaps with the numbers to complete the serie'
+    explanation: 'Fill the blank gaps with the numbers to complete the serie'

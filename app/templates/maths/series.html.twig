@@ -20,6 +20,8 @@
       <div id="serie" class="row">
         <div class="col">
 
+          <p>{% trans %}maths.series.explanation{% endtrans %}</p>
+
           {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
           {{ form_start(form) }}
           {{ form_widget(form) }}
@@ -34,7 +36,7 @@
       </div>
 
       {% if pass is same as(null) %}
-        {% trans %}maths.series.fill_gaps{% endtrans %}
+
 
       {% else %}
         {% if pass %}
