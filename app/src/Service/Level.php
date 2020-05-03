@@ -12,18 +12,61 @@ class Level
         $this->session = $session;
     }
 
-    public function reset($name) : void
+    public function resetStreak($name) : void
     {
-        $this->session->set($name, 0);
+        $this->session->set($name . '_streak', 0);
     }
 
-    public function add($name, $num = 1) : int
+    /**
+     * @param string $name
+     * @return int
+     */
+    public function getStreak($name) : int
     {
+        return $this->session->get($name . '_streak', 0);
+    }
+
+    public function addStreak($name, $num = 1) : int
+    {
+        $name .=  '_streak';
         $streak = $this->session->get($name, 0);
         $streak += $num;
         $this->session->set($name, $streak);
 
         return $streak;
+    }
+
+    /**
+     * getLevel.
+     *
+     * @param string $name
+     * @return int
+     */
+    public function getLevel($name) : int
+    {
+        return $this->session->get($name . '_level', 0);
+    }
+
+    /**
+     * setLevel.
+     * Defines a level for a section/exercice, and reset the streak if the level has changed.
+     *
+     * @param string $name
+     * @param int $level
+     * @return bool True if the level changes
+     */
+    public function setLevel($name, $level) : bool
+    {
+        $actualLevel = $this->session->get($name . '_level', 0);
+
+        if ($actualLevel != $level) {
+            $this->session->set($name . '_level', $level);
+            $this->resetStreak($name);
+
+            $changeLevel = true;
+        }
+
+        return $changeLevel ?? false;
     }
 
     /**

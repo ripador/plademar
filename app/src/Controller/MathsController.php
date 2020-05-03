@@ -68,6 +68,7 @@ class MathsController extends AbstractController
         if ($levelForm->isSubmitted() && $levelForm->isValid()) {
             // Generate the numeric serie based on the selected level
             $d = $levelForm->getData()['difficult'];
+            $levelService->setLevel('series', $d);
 
             $ini = rand($levels[$d]['lowest'], $levels[$d]['highest']);
             $length = $levels[$d]['length'];
@@ -82,9 +83,14 @@ class MathsController extends AbstractController
                 $list[$k] = array_key_exists($k, $gaps) ? null : $v;
             }
 
+            // Create again the form with the inputs generated
             $form = $this->createForm(SerieType::class, ['serie' => $list, 'gaps' => json_encode($gaps)]);
 
         } elseif ($form->isSubmitted() && $form->isValid()) {
+            //Fill the difficult on the level form from the session, to maintain in the same level
+            $levelForm->get('difficult')->setData($levelService->getLevel('series'));
+
+
             // If the form with the serie has been submited, check the response
             $formData = $form->getData();
             $serie = $formData['serie'];
@@ -99,7 +105,7 @@ class MathsController extends AbstractController
             }
 
             if ($pass) {
-                $streak = $levelService->add('series_streak');
+                $streak = $levelService->addStreak('series');
                 $changeLevel = ($streak >= 4);
             }
         }
@@ -110,7 +116,7 @@ class MathsController extends AbstractController
             'gaps' => $gaps ?? null,
             'form' => isset($form) ? $form->createView() : null,
             'pass' => isset($pass) ? $pass : null,
-            'streak' => $streak ?? 0,
+            'streak' => $streak ?? $levelService->getStreak('series'),
             'changeLevel' => isset($changeLevel) ? $changeLevel : false,
         ]);
     }
