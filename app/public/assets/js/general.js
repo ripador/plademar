@@ -15,3 +15,15 @@ function updateResponse(msg, valid) {
     }
     response.addClass(lvl).show();
 }
+
+/**
+ * formDisable.
+ * Disables all inputs in the form and hides the submmit button.
+ *
+ * @param selector string
+ */
+function formDisable(selector) {
+    let the_form = $(selector);
+    the_form.find('input').attr('disabled', 'disabled');
+    the_form.find('button[type="submit"]').hide();
+}

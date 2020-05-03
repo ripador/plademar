@@ -35,10 +35,8 @@
         </div>
       </div>
 
-      {% if pass is same as(null) %}
+      {% if pass is not same as(null) %}
 
-
-      {% else %}
         {% if pass %}
           {% include 'default/_response.html.twig' with {
             id: 'ok',
@@ -57,4 +55,15 @@
       {% endif %}
     {% endif %}
   </div>
+{% endblock %}
+
+{% block page_js %}
+  {% if pass is defined and pass %}
+    {# If the exercice is completed, disable the form #}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            formDisable('form[name="serie"]');
+        });
+    </script>
+  {% endif %}
 {% endblock %}

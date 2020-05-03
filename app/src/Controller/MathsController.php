@@ -106,9 +106,9 @@ class MathsController extends AbstractController
         $form->handleRequest($request);
 
         if ($levelForm->isSubmitted() && $levelForm->isValid()) {
+            // Generate the numeric serie based on the selected level
             $d = $levelForm->getData()['difficult'];
 
-            // Generate the numeric serie
             $ini = rand($levels[$d]['lowest'], $levels[$d]['highest']);
             $length = $levels[$d]['length'];
             $step = array_rand($levels[$d]['steps']);
@@ -125,6 +125,7 @@ class MathsController extends AbstractController
             $form = $this->createForm(SerieType::class, ['serie' => $list, 'gaps' => json_encode($gaps)]);
 
         } elseif ($form->isSubmitted() && $form->isValid()) {
+            // If the form with the serie has been submited, check the response
             $formData = $form->getData();
             $serie = $formData['serie'];
             $gaps = json_decode($formData['gaps']);
