@@ -18,6 +18,7 @@ resolve:
   check: comprobar
   ok: 'Molt bé'
   ko: 'Torna a probar'
+  change_level: 'Hauries de passar al següent nivell'
 
 maths:
   sort:

@@ -2,6 +2,7 @@ resolve:
   check: check
   ok: 'Well done'
   ko: 'Try again'
+  change_level: 'You should go to the next level'
 
 maths:
   sort:

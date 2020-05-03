@@ -44,6 +44,14 @@
             message: 'resolve.ok'|trans
           } %}
 
+          {% if changeLevel %}
+            {% include 'default/_response.html.twig' with {
+              id: 'change_level',
+              level: 'alert-warning',
+              message: 'resolve.change_level'|trans
+            } %}
+          {% endif %}
+
         {% else %}
           {% include 'default/_response.html.twig' with {
             id: 'ko',
