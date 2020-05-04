@@ -115,9 +115,9 @@ class MathsController extends AbstractController
             'serie' => $serie ?? null,
             'gaps' => $gaps ?? null,
             'form' => isset($form) ? $form->createView() : null,
-            'pass' => isset($pass) ? $pass : null,
+            'pass' => $pass ?? null,
             'streak' => $streak ?? $levelService->getStreak('series'),
-            'changeLevel' => isset($changeLevel) ? $changeLevel : false,
+            'changeLevel' => $changeLevel ?? false,
         ]);
     }
 }
