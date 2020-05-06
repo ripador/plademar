@@ -90,34 +90,105 @@ class MathsController extends AbstractController
             //Fill the difficult on the level form from the session, to maintain in the same level
             $levelForm->get('difficult')->setData($levelService->getLevel('series'));
 
-
             // If the form with the serie has been submited, check the response
-            $formData = $form->getData();
-            $serie = $formData['serie'];
-            $gaps = json_decode($formData['gaps']);
+            $pass = $this->validateSerie($request, $form, 'series');
+        }
 
-            $pass = true;
-            foreach ($gaps as $k => $v) {
-                if ($serie[$k] != $v) {
-                    $pass = false;
-                    break;
-                }
-            }
+        return $this->render('maths/default.html.twig', [
+            'messages_key' => 'maths.series',
+            'levelForm' => $levelForm->createView(),
+            'form' => isset($form) ? $form->createView() : null,
+            'form_generated' => (isset($serie) && $serie != null),
+            'pass' => $pass ?? null,
+            'streak' => $streak ?? $levelService->getStreak('series'),
+        ]);
+    }
 
-            if ($pass) {
-                $streak = $levelService->addStreak('series');
-                $changeLevel = ($streak >= 4);
+    /**
+     * validateSerie.
+     * This method checks the if the form response is correct, comparing the filled gaps with the original serie.
+     *
+     * @param Request $request
+     * @param \Symfony\Component\Form\FormInterface $form
+     * @return bool
+     */
+    private function validateSerie($request, $form, $name) {
+        $formData = $form->getData();
+        $serie = $formData['serie'];
+        $gaps = json_decode($formData['gaps']);
+
+        $pass = true;
+        foreach ($gaps as $k => $v) {
+            if ($serie[$k] != $v) {
+                $pass = false;
+                break;
             }
         }
 
-        return $this->render('maths/series.html.twig', [
+        if ($pass) {
+            $levelService = new Level($request->getSession());
+            $levelService->addStreak($name);
+        }
+
+        return $pass;
+    }
+
+    /**
+     * continueFrom.
+     * This exercice is like a serie generated in another way. The form and checking is the same.
+     *
+     * @Route("/continueFrom", name="maths_continueFrom")
+     * @param Request $request
+     * @return Response
+     */
+    public function continueFrom(Request $request)
+    {
+        $levelService = new Level($request->getSession());
+        $levels = $levelService->getMathsContinueFromLevels();
+
+        $levelForm = $this->createForm(LevelType::class, null, ['levels' => $levels]);
+        $levelForm->handleRequest($request);
+
+        $form = $this->createForm(SerieType::class);
+        $form->handleRequest($request);
+
+        if ($levelForm->isSubmitted() && $levelForm->isValid()) {
+            // Generate the numeric serie based on the selected level
+            $d = $levelForm->getData()['difficult'];
+            $levelService->setLevel('continueFrom', $d);
+            $tail = $levels[$d]['tail'] ?? null;
+
+            $mathsService = new Maths();
+            $start = $mathsService->rand($levels[$d]['from_low'], $levels[$d]['from_top'], $tail);
+            $serie = $mathsService->generateContinueFrom($start, $levels[$d]['length']);
+
+            //Create the gaps in all positions except the first
+            $list = $gaps = [];
+            foreach ($serie as $k => $v) {
+                if (count($list) == 0) {
+                    $list[$k] = $v;
+                } else {
+                    $list[$k] = null;
+                    $gaps[$k] = $v;
+                }
+            }
+
+            // Create again the form with the inputs generated
+            $form = $this->createForm(SerieType::class, ['serie' => $list, 'gaps' => json_encode($gaps)]);
+
+        } elseif ($form->isSubmitted() && $form->isValid()) {
+            $levelForm->get('difficult')->setData($levelService->getLevel('continueFrom'));
+
+            $pass = $this->validateSerie($request, $form, 'continueFrom');
+        }
+
+        return $this->render('maths/default.html.twig', [
+            'messages_key' => 'maths.continueFrom',
             'levelForm' => $levelForm->createView(),
-            'serie' => $serie ?? null,
-            'gaps' => $gaps ?? null,
             'form' => isset($form) ? $form->createView() : null,
+            'form_generated' => (isset($serie) && $serie != null),
             'pass' => $pass ?? null,
-            'streak' => $streak ?? $levelService->getStreak('series'),
-            'changeLevel' => $changeLevel ?? false,
+            'streak' => $streak ?? $levelService->getStreak('continueFrom'),
         ]);
     }
 }

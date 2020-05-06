@@ -72,4 +72,38 @@ class Maths
         }
         return $gaps;
     }
+
+    /**
+     * rand.
+     * Generate a random number between the $min and $max.
+     * If $tail is provided, return only numbers that finish with $tail.
+     *
+     * @param int $min
+     * @param int $max
+     * @param int $tail Start only with numbers finishing with this
+     * @return int
+     */
+    public function rand($min, $max, $tail = null) {
+        do {
+            $num = rand($min, $max);
+        } while ($tail != null && !preg_match('/\d*' . $tail . '$/', $num));
+
+        return $num;
+    }
+    /**
+     * generateContinueFrom.
+     * Create a continuous serie of +1 from the start.
+     *
+     * @param int $start
+     * @param int $length
+     * @return array
+     */
+    public function generateContinueFrom($start, $length) : array
+    {
+        $serie = [$start];
+        while (count($serie) <= $length) {
+            $serie[] = ++$start;
+        }
+        return $serie;
+    }
 }

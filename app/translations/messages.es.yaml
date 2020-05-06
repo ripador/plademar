@@ -24,10 +24,14 @@ resolve:
 
 maths:
   sort:
-    sort: ordenar
+    name: ordenar
     title: Ordena los números
     explanation: 'Ordena los números de menor a mayor'
   series:
-    series: series
+    name: series
     title: Complata las series numéricas
     explanation: Rellena los espacios vacíos con números para completar la serie
+  continueFrom:
+    name: continuar
+    title: Continua desde un número
+    explanation: 'Llena los vacíos con los números que siguen desde el mostrado'

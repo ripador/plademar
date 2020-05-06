@@ -51,7 +51,7 @@ class Level
      * setLevel.
      * Defines a level for a section/exercice, and reset the streak if the level has changed.
      *
-     * @param string $name
+     * @param string $name Name of the exercice
      * @param int $level
      * @return bool True if the level changes
      */
@@ -95,6 +95,19 @@ class Level
             ['name' => 'Easy',   'length' => 3,  'gaps' => 1, 'lowest' => 1, 'highest' => 6,   'steps' => [1]],
             ['name' => 'Medium', 'length' => 6,  'gaps' => 2, 'lowest' => 0, 'highest' => 99,  'steps' => [2, 4, 5]],
             ['name' => 'Hard',   'length' => 10, 'gaps' => 4, 'lowest' => 0, 'highest' => 999, 'steps' => [3, 5, 10]],
+        ];
+    }
+
+    public function getMathsContinueFromLevels() : array
+    {
+        return [
+            ['name' => '1', 'from_low' => 0, 'from_top' => 9, 'length' => 4],
+            ['name' => '2', 'from_low' => 0, 'from_top' => 19, 'length' => 4],
+            ['name' => '3', 'from_low' => 11, 'from_top' => 30, 'length' => 4],
+            ['name' => '4', 'from_low' => 30, 'from_top' => 99, 'length' => 4],
+            ['name' => '5', 'from_low' => 100, 'from_top' => 999, 'tail' => 98, 'length' => 4],
+            ['name' => '6', 'from_low' => 1000, 'from_top' => 9999, 'tail' => 98, 'length' => 4],
+            ['name' => '7', 'from_low' => 10000, 'from_top' => 999999, 'tail' => 98, 'length' => 4],
         ];
     }
 }

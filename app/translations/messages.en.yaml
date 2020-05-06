@@ -6,10 +6,14 @@ resolve:
 
 maths:
   sort:
-    sort: sort
+    name: sort
     title: 'Sort the numbers'
     explanation: 'Ordena els nombres de més petit a més gran'
   series:
-    series: Series
+    name: Series
     title: Complete the numeric series
     explanation: 'Fill the blank gaps with the numbers to complete the serie'
+  continueFrom:
+    name: continue
+    title: Continue from a number
+    explanation: 'Fill the gaps with the numbers that continue from the shown'

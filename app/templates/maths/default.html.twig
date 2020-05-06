@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ (messages_key ~ '.title')|trans|capitalize }}{% endblock %}
+
+{% block body %}
+  <div class="container">
+
+    {# Breadcrumb #}
+    {% include 'default/_breadcrumb.html.twig' with {
+      links: {
+        ('Home'|trans): path('homepage'),
+        ('Maths'|trans|capitalize): '#',
+      },
+      active: (messages_key ~ '.name')|trans|capitalize
+    } %}
+
+    {% include 'maths/_level_form.html.twig' with { 'form': levelForm } %}
+
+    {% if form_generated or pass is not same as(null) %}
+      <div id="main_form_container" class="row">
+        <div class="col">
+
+          <p>{{ (messages_key ~ '.explanation')|trans }}</p>
+
+          {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+          {{ form_start(form) }}
+          {{ form_widget(form) }}
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">{{ 'resolve.check'|trans|capitalize }}</button>
+          </div>
+
+          {{ form_end(form) }}
+
+        </div>
+      </div>
+
+      {% include 'common/_pass.html.twig' %}
+
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block page_js %}
+  {% if pass is defined and pass %}
+    {# If the exercice is completed, disable the form #}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            formDisable('#main_form_container form');
+        });
+    </script>
+  {% endif %}
+{% endblock %}

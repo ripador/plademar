@@ -1,0 +1,28 @@
+{% if pass is not same as(null) %}
+
+  {% if pass %}
+    {% include 'default/_response.html.twig' with {
+      id: 'ok',
+      level: 'alert-success',
+      message: 'resolve.ok'|trans
+    } %}
+
+    {% if streak >= 4 %}
+      {% include 'default/_response.html.twig' with {
+        id: 'change_level',
+        level: 'alert-warning',
+        message: 'resolve.change_level'|trans
+      } %}
+    {% endif %}
+
+  {% else %}
+    {% include 'default/_response.html.twig' with {
+      id: 'ko',
+      level: 'alert-danger',
+      message: 'resolve.ko'|trans
+    } %}
+
+  {% endif %}
+{% endif %}
+
+<p>{% trans %}Streak{% endtrans %}: {{ streak }}</p>
