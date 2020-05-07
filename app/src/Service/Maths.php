@@ -12,7 +12,7 @@ class Maths
      * @param bool $shuffle If true shuffle the array before returning
      * @return array
      */
-    public function generateRandomList($length, $min, $max, $shuffle = false) : array
+    public static function generateRandomList($length, $min, $max, $shuffle = false) : array
     {
         $number_array = [];
         do {
@@ -38,7 +38,7 @@ class Maths
      * @param int $step Number to add in each iteration
      * @return array
      */
-    public function generateSerie($ini, $len, $step) : array
+    public static function generateSerie($ini, $len, $step) : array
     {
         $serie = [];
         $num = $ini;
@@ -58,7 +58,7 @@ class Maths
      * @param int $num_gaps
      * @return array
      */
-    public function generateGaps($serie, $num_gaps) : array
+    public static function generateGaps($serie, $num_gaps) : array
     {
         $gap_pos = array_rand($serie, $num_gaps);
 
@@ -83,7 +83,7 @@ class Maths
      * @param int $tail Start only with numbers finishing with this
      * @return int
      */
-    public function rand($min, $max, $tail = null) {
+    public static function rand($min, $max, $tail = null) {
         do {
             $num = rand($min, $max);
         } while ($tail != null && !preg_match('/\d*' . $tail . '$/', $num));
@@ -98,7 +98,7 @@ class Maths
      * @param int $length
      * @return array
      */
-    public function generateContinueFrom($start, $length) : array
+    public static function generateContinueFrom($start, $length) : array
     {
         $serie = [$start];
         while (count($serie) <= $length) {

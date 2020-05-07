@@ -4,7 +4,6 @@ namespace App\Controller;
 use App\Form\LevelType;
 use App\Form\SerieType;
 use App\Service\Level;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,8 +34,7 @@ class MathsController extends AbstractController
         if ($levelForm->isSubmitted() && $levelForm->isValid()) {
             $d = $levelForm->getData()['difficult'];
 
-            $mathsService = new Maths();
-            $number_array = $mathsService->generateRandomList($levels[$d]['length'], $levels[$d]['min'],
+            $number_array = Maths::generateRandomList($levels[$d]['length'], $levels[$d]['min'],
                 $levels[$d]['max'], true);
         }
 
@@ -74,9 +72,8 @@ class MathsController extends AbstractController
             $length = $levels[$d]['length'];
             $step = array_rand($levels[$d]['steps']);
 
-            $mathsService = new Maths();
-            $serie = $mathsService->generateSerie($ini, $length, $levels[$d]['steps'][$step]);
-            $gaps = $mathsService->generateGaps($serie, $levels[$d]['gaps']);
+            $serie = Maths::generateSerie($ini, $length, $levels[$d]['steps'][$step]);
+            $gaps = Maths::generateGaps($serie, $levels[$d]['gaps']);
 
             $list = [];
             foreach ($serie as $k => $v) {
@@ -158,9 +155,8 @@ class MathsController extends AbstractController
             $levelService->setLevel('continueFrom', $d);
             $tail = $levels[$d]['tail'] ?? null;
 
-            $mathsService = new Maths();
-            $start = $mathsService->rand($levels[$d]['from_low'], $levels[$d]['from_top'], $tail);
-            $serie = $mathsService->generateContinueFrom($start, $levels[$d]['length']);
+            $start = Maths::rand($levels[$d]['from_low'], $levels[$d]['from_top'], $tail);
+            $serie = Maths::generateContinueFrom($start, $levels[$d]['length']);
 
             //Create the gaps in all positions except the first
             $list = $gaps = [];
