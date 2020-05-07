@@ -7,6 +7,6 @@ form[name="serie"] #serie_serie div.form-group label {
     display: none;
 }
 form[name="serie"] #serie_serie div.form-group {
-    width: 110px;
+    width: 150px;
     float: left;
 }
