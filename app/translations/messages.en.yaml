@@ -1,3 +1,11 @@
+Hello: Hello
+Home: Home
+Index: Index
+Languages: Languages
+Maths: Maths
+Play: Play
+Streak: Streak
+
 resolve:
   check: check
   ok: 'Well done'
