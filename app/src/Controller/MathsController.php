@@ -55,10 +55,7 @@ class MathsController extends AbstractController
     public function series(Request $request)
     {
         $levelService = new Level($request->getSession());
-        $levels = $levelService->getMathsSeriesLevels();
-
-        $levelForm = $this->createForm(LevelType::class, null, ['levels' => $levels]);
-        $levelForm->handleRequest($request);
+        list($levelForm, $levels) = $this->createLevelForm($request, 'series');
 
         $form = $this->createForm(SerieType::class);
         $form->handleRequest($request);
@@ -107,6 +104,7 @@ class MathsController extends AbstractController
      *
      * @param Request $request
      * @param \Symfony\Component\Form\FormInterface $form
+     * @param string $name
      * @return bool
      */
     private function validateSerie($request, $form, $name) {
@@ -131,6 +129,25 @@ class MathsController extends AbstractController
     }
 
     /**
+     * createLevelForm.
+     * Get the difficulty levels for the exercice with given name and create the form.
+     *
+     * @param Request $request
+     * @param string $exercice
+     * @return array
+     */
+    private function createLevelForm(Request $request, $exercice)
+    {
+        $levelService = new Level($request->getSession());
+        $levels = $levelService->getLevelForExercice($exercice);
+
+        $levelForm = $this->createForm(LevelType::class, null, ['levels' => $levels]);
+        $levelForm->handleRequest($request);
+
+        return [$levelForm, $levels];
+    }
+
+    /**
      * continueFrom.
      * This exercice is like a serie generated in another way. The form and checking is the same.
      *
@@ -141,10 +158,7 @@ class MathsController extends AbstractController
     public function continueFrom(Request $request)
     {
         $levelService = new Level($request->getSession());
-        $levels = $levelService->getMathsContinueFromLevels();
-
-        $levelForm = $this->createForm(LevelType::class, null, ['levels' => $levels]);
-        $levelForm->handleRequest($request);
+        list($levelForm, $levels) = $this->createLevelForm($request, 'ContinueFrom');
 
         $form = $this->createForm(SerieType::class);
         $form->handleRequest($request);

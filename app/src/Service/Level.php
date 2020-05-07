@@ -70,6 +70,19 @@ class Level
     }
 
     /**
+     * getLevelForExercice.
+     *
+     * @param string $name
+     * @return array
+     */
+    public function getLevelForExercice($name) : array
+    {
+        $func = 'getMaths' . ucfirst($name) . 'Levels';
+
+        return $this->$func();
+    }
+
+    /**
      * To define de difficulty levels use this array. The 'name' is shown in the selector.
      * 'max' is the highest possible number to appear.
      * 'rows' *4 will be the number of numbers to sort.
