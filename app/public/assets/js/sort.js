@@ -16,7 +16,6 @@ $(function() {
             let val = parseInt(obj.attr('data-value'));
 
             if (stop === false && val < ant) {
-                //updateResponse("EL NÚMERO " + val + " ESTÀ A LA POSICIÓ " + pos, false);
                 $('#ko').show();
                 stop = true;
             }
@@ -25,8 +24,8 @@ $(function() {
         });
 
         if (stop === false) {
-            //updateResponse("MOLT BÉ", true);
             $('#ok').show();
+            $('#check').hide();
         }
     });
 });
