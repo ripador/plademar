@@ -1,0 +1,23 @@
+{% block operation_widget %}
+
+  <div class="operation">
+
+    <div class="row">
+      {% set i = 0 %}
+      {% for child in form.operands %}
+        {% if i > 0 %}
+          <div class="col-sm-1 operator"><span></span></div>
+        {% endif %}
+        <div class="col operand">{{ form_widget(child) }}</div>
+        {% set i = i +1 %}
+      {% endfor %}
+
+      <div class="col-sm-1 operator">=</div>
+      <div class="col result">{{ form_widget(form.result) }}</div>
+
+    </div>
+
+    {{ form_rest(form) }}
+  </div>
+
+{% endblock %}

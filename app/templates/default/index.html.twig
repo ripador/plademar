@@ -1,25 +1,35 @@
 {% extends 'base.html.twig' %}
 
+{% block main_attrs %}
+  style="background-image: url('{{ asset('assets/images/school-times-3599175_1920.jpg') }}');"
+{% endblock %}
+
 {% block body %}
   <div class="container">
 
     <div class="row">
-      <div class="col-md">
-        <h1>{% trans %}Hello{% endtrans %}</h1>
-        <p>TODO: missatge de benvinguda</p>
-        <p>TODO: com fer servir la web</p>
-      </div>
-    </div>
 
-    <div class="row">
       <div class="col-md">
-        <h2>{% trans %}Maths{% endtrans %}</h2>
-        <ul>
-          <li><a href="{{ path('maths_sort') }}">{% trans %}maths.sort.name{% endtrans %}</a></li>
-          <li><a href="{{ path('maths_series') }}">{% trans %}maths.series.name{% endtrans %}</a></li>
-          <li><a href="{{ path('maths_continueFrom') }}">{% trans %}maths.continueFrom.name{% endtrans %}</a></li>
-        </ul>
+        {% set content %}
+          <h1>{% trans %}Hello{% endtrans %}</h1>
+          <p>TODO: missatge de benvinguda</p>
+          <p>TODO: com fer servir la web</p>
+        {% endset %}
+        {% include 'common/_portlet.html.twig' %}
       </div>
+
+      <div class="col-md">
+        {% set content %}
+          <h2>{% trans %}Maths{% endtrans %}</h2>
+          <ul>
+            <li><a href="{{ path('maths_sort') }}">{% trans %}maths.sort.name{% endtrans %}</a></li>
+            <li><a href="{{ path('maths_series') }}">{% trans %}maths.series.name{% endtrans %}</a></li>
+            <li><a href="{{ path('maths_continueFrom') }}">{% trans %}maths.continueFrom.name{% endtrans %}</a></li>
+          </ul>
+        {% endset %}
+        {% include 'common/_portlet.html.twig' %}
+      </div>
+
     </div>
 
   </div>

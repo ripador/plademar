@@ -2,6 +2,15 @@
     margin-bottom: 20px;
 }
 
+div.card {
+    margin: 10px 0 10px 0;
+}
+
+body main {
+    background-size: 100%;
+    padding: 20px;
+}
+
 /* Styles for the maths-series */
 form[name="serie"] #serie_serie div.form-group label {
     display: none;
@@ -9,4 +18,18 @@ form[name="serie"] #serie_serie div.form-group label {
 form[name="serie"] #serie_serie div.form-group {
     width: 150px;
     float: left;
+}
+
+form[name="operations"] #operations_operations div.form-group legend,
+form[name="operations"] #operations_operations div.form-group  div.col-sm-10 div.form-group label {
+    display: none;
+}
+form[name="operations"] #operations_operations div.form-group div.col-sm-10 div.form-group {
+    width: 150px;
+    float: left;
+}
+form[name="operations"] #operations_operations div.form-group div.row div.col-sm-1 {
+    width: 10px;
+    padding: 5px 0 0 0;
+    text-align: center;
 }
