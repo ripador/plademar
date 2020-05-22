@@ -1,17 +1,15 @@
 .container .row {
     margin-bottom: 20px;
 }
-
 div.card {
     margin: 10px 0 10px 0;
 }
-
 body main {
     background-size: 100%;
     padding: 20px;
 }
 
-/* Styles for the maths-series */
+/* Styles for the maths series */
 form[name="serie"] #serie_serie div.form-group label {
     display: none;
 }
@@ -20,6 +18,7 @@ form[name="serie"] #serie_serie div.form-group {
     float: left;
 }
 
+/* Styles for maths operations */
 form[name="operations"] #operations_operations div.form-group legend,
 form[name="operations"] #operations_operations div.form-group  div.col-sm-10 div.form-group label {
     display: none;

@@ -105,9 +105,13 @@ class Level
     public function getMathsSeriesLevels() : array
     {
         return [
-            ['name' => 'Easy',   'length' => 3,  'gaps' => 1, 'lowest' => 1, 'highest' => 6,   'steps' => [1]],
-            ['name' => 'Medium', 'length' => 6,  'gaps' => 2, 'lowest' => 0, 'highest' => 99,  'steps' => [2, 4, 5]],
-            ['name' => 'Hard',   'length' => 10, 'gaps' => 4, 'lowest' => 0, 'highest' => 999, 'steps' => [3, 5, 10]],
+            ['name' => '1', 'length' => 3, 'gaps' => 1, 'lowest' => 1, 'highest' => 6,   'steps' => [1]],
+            ['name' => '2', 'length' => 4, 'gaps' => 2, 'lowest' => 0, 'highest' => 9,  'steps' => [2, 4, 5]],
+            ['name' => '3', 'length' => 5, 'gaps' => 2, 'lowest' => 0, 'highest' => 99, 'steps' => [3, 4, 5]],
+            ['name' => '4', 'length' => 6, 'gaps' => 3, 'lowest' => 0, 'highest' => 99,   'steps' => [5, 10]],
+            ['name' => '5', 'length' => 7, 'gaps' => 3, 'lowest' => 0, 'highest' => 999,  'steps' => [2, 5, 10]],
+            ['name' => '6', 'length' => 8, 'gaps' => 3, 'lowest' => 0, 'highest' => 999, 'steps' => [5, 10, 15]],
+            ['name' => '7', 'length' => 9, 'gaps' => 4, 'lowest' => 0, 'highest' => 999, 'steps' => [3, 5, 7, 11]],
         ];
     }
 
@@ -121,6 +125,26 @@ class Level
             ['name' => '5', 'from_low' => 100, 'from_top' => 999, 'tail' => 98, 'length' => 4],
             ['name' => '6', 'from_low' => 1000, 'from_top' => 9999, 'tail' => 98, 'length' => 4],
             ['name' => '7', 'from_low' => 10000, 'from_top' => 999999, 'tail' => 98, 'length' => 4],
+        ];
+    }
+
+    public function getMathsOperationsLevels() : array
+    {
+        return [
+            ['name' => 1, 'min' => 0, 'max' => 9, 'num' => 10, 'time' => 60, 'strategies' => [1]],
+            ['name' => 2, 'min' => 0, 'max' => 20, 'num' => 20, 'time' => 90, 'strategies' => [1, 2]],
+            ['name' => 3, 'min' => 0, 'max' => 100, 'num' => 30, 'time' => 120, 'strategies' => [10]],
+        ];
+    }
+
+    public function getMathsStrategiesLevels() : array
+    {
+        return [
+            ['name' => '1. (+/- *0)', 'min' => 0, 'max' => 10, 'num' => 2, 'time' => 60,
+                'strategies' => [
+                    ['operators' => ['+', '-'], 'operand_multiplier' => 10]
+                ]
+            ],
         ];
     }
 }

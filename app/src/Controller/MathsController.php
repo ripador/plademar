@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Form\LevelType;
+use App\Form\OperationsType;
 use App\Form\SerieType;
 use App\Service\Level;
 use Symfony\Component\HttpFoundation\Request;
@@ -201,4 +202,72 @@ class MathsController extends AbstractController
             'streak' => $streak ?? $levelService->getStreak('continueFrom'),
         ]);
     }
+
+    /**
+     * @Route("/strategies", name="maths_strategies")
+     * @param Request $request
+     * @return Response
+     */
+    public function strategies(Request $request)
+    {
+        $levelService = new Level($request->getSession());
+        list($levelForm, $levels) = $this->createLevelForm($request, 'strategies');
+
+        $form = $this->createForm(OperationsType::class);
+        $form->handleRequest($request);
+
+        if ($levelForm->isSubmitted() && $levelForm->isValid()) {
+            // Generate the numeric serie based on the selected level
+            $d = $levelForm->getData()['difficult'];
+            $levelService->setLevel('strategies', $d);
+
+            try {
+                $operations = Maths::generateOperations(
+                    $levels[$d]['num'],
+                    $levels[$d]['min'], $levels[$d]['max'],
+                    $levels[$d]['strategies']
+                );
+                $form = $this->createForm(OperationsType::class, ['operations' => $operations]);
+            } catch (\Exception $e) {
+                $this->addFlash('danger', $e->getMessage());
+            }
+
+        } elseif ($form->isSubmitted() && $form->isValid()) {
+            $levelForm->get('difficult')->setData($levelService->getLevel('strategies'));
+
+            $pass = $this->validateOperations($request, $form);
+        }
+
+        return $this->render('maths/default.html.twig', [
+            'messages_key' => 'maths.strategies',
+            'levelForm' => $levelForm->createView(),
+            'form' => isset($form) ? $form->createView() : null,
+            'form_generated' => (isset($operations) && $operations != null),
+            'pass' => $pass ?? null,
+            'streak' => $streak ?? $levelService->getStreak('strategies'),
+            'javascripts' => [
+                'operations.js'
+            ]
+        ]);
+    }
+
+    /**
+     * validateOperations.
+     *
+     * @param Request $request
+     * @param \Symfony\Component\Form\FormInterface $form
+     * @return bool
+     */
+    private function validateOperations(Request $request, $form)
+    {
+        $operations = $form->get('operations')->getData();
+        foreach ($operations as $operation) {
+            if ($operation['result'] != (float) $operation['response']) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

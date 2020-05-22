@@ -106,4 +106,68 @@ class Maths
         }
         return $serie;
     }
+
+    /**
+     * generateOperation.
+     *
+     * @param int $min
+     * @param int $max
+     * @param array $strategy The strategy parameters to apply
+     * @param int $num_operands Number of operators
+     * @return array
+     * @throws \Exception
+     */
+    public static function generateOperation($min, $max, $strategy, $num_operands = 2)
+    {
+        $operands = [];
+        $result = null;
+
+        $operators = isset($strategy['operators']) ? $strategy['operators'] : ['+'];
+        $operator = $operators[array_rand($operators, 1)];
+        $operand_multiplier = isset($strategy['operand_multiplier']) ? $strategy['operand_multiplier'] : 1;
+
+        for ($i=0; $i<$num_operands; $i++) {
+            $operands[$i] = rand($min, $max) * $operand_multiplier;
+
+            switch ($operator) {
+                case '+':
+                    $result += $operands[$i];
+                    break;
+                case '-':
+                    $result -= $operands[$i];
+                    break;
+                default:
+                    throw new \Exception('Operator not supported');
+            }
+        }
+
+        return [
+            'operands' => $operands,
+            'operator' => $operator,
+            'result' => $result,
+            'response' => null,
+        ];
+    }
+
+    /**
+     * generateOperations.
+     *
+     * @param int $num
+     * @param int $min
+     * @param int $max
+     * @param array $strategies Available stretegies to pick one for each generated operation
+     * @return array
+     * @throws \Exception
+     */
+    public static function generateOperations($num, $min, $max, $strategies = [])
+    {
+        $operations = [];
+
+        for ($i=0; $i<$num; $i++) {
+            $strategy = $strategies[array_rand($strategies, 1)];
+            $operations[$i] = self::generateOperation($min, $max, $strategy);
+        }
+
+        return $operations;
+    }
 }
