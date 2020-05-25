@@ -129,15 +129,20 @@ class Maths
         for ($i=0; $i<$num_operands; $i++) {
             $operands[$i] = rand($min, $max) * $operand_multiplier;
 
-            switch ($operator) {
-                case '+':
-                    $result += $operands[$i];
-                    break;
-                case '-':
-                    $result -= $operands[$i];
-                    break;
-                default:
-                    throw new \Exception('Operator not supported');
+            if ($i == 0) {
+                // First operand is the operand itself, no operation is applied now
+                $result = $operands[$i];
+            } else {
+                switch ($operator) {
+                    case '+':
+                        $result += $operands[$i];
+                        break;
+                    case '-':
+                        $result -= $operands[$i];
+                        break;
+                    default:
+                        throw new \Exception('Operator not supported');
+                }
             }
         }
 

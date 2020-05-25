@@ -262,11 +262,10 @@ class MathsController extends AbstractController
     {
         $operations = $form->get('operations')->getData();
         foreach ($operations as $operation) {
-            if ($operation['result'] != (float) $operation['response']) {
+            if ((float) $operation['result'] != (float) $operation['response']) {
                 return false;
             }
         }
-
         return true;
     }
 
