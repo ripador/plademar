@@ -125,10 +125,18 @@ class Maths
         $operators = isset($strategy['operators']) ? $strategy['operators'] : ['+'];
         $operator = $operators[array_rand($operators, 1)];
         $operand_multiplier = isset($strategy['operand_multiplier']) ? $strategy['operand_multiplier'] : 1;
+        $operand_limit = isset($strategy['operand_limit']) ? $strategy['operand_limit'] : null;
 
         for ($i=0; $i<$num_operands; $i++) {
-            $operands[$i] = rand($min, $max) * $operand_multiplier;
+            //GET OPERAND
+            if ($i > 0 && $operand_limit !== null) {
+                //Limit the second and following operatos to a list given in the strategy param
+                $operands[$i] = $operand_limit[array_rand($operand_limit, 1)];
+            } else {
+                $operands[$i] = rand($min, $max) * $operand_multiplier;
+            }
 
+            // APPLY OPERATION
             if ($i == 0) {
                 // First operand is the operand itself, no operation is applied now
                 $result = $operands[$i];

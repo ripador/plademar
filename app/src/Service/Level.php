@@ -140,9 +140,14 @@ class Level
     public function getMathsStrategiesLevels() : array
     {
         return [
-            ['name' => '1. (+/- *0)', 'min' => 0, 'max' => 10, 'num' => 2, 'time' => 60,
+            ['name' => '1. (+/- *0)', 'min' => 0, 'max' => 10, 'num' => 20, 'time' => 60,
                 'strategies' => [
                     ['operators' => ['+', '-'], 'operand_multiplier' => 10]
+                ]
+            ],
+            ['name' => '2. (+/- 1|2)', 'min' => 0, 'max' => 99, 'num' => 20, 'time' => 60,
+                'strategies' => [
+                    ['operators' => ['+', '-'], 'operand_limit' => [1, 2]]
                 ]
             ],
         ];

@@ -235,7 +235,7 @@ class MathsController extends AbstractController
         } elseif ($form->isSubmitted() && $form->isValid()) {
             $levelForm->get('difficult')->setData($levelService->getLevel('strategies'));
 
-            $pass = $this->validateOperations($request, $form);
+            $pass = $this->validateOperations($request, $form, 'strategies');
         }
 
         return $this->render('maths/default.html.twig', [
@@ -258,15 +258,22 @@ class MathsController extends AbstractController
      * @param \Symfony\Component\Form\FormInterface $form
      * @return bool
      */
-    private function validateOperations(Request $request, $form)
+    private function validateOperations(Request $request, $form, $exercice)
     {
+        $pass = true;
         $operations = $form->get('operations')->getData();
         foreach ($operations as $operation) {
             if ((float) $operation['result'] != (float) $operation['response']) {
-                return false;
+                $pass = false;
+                break;
             }
         }
-        return true;
+
+        if ($pass) {
+            $levelService = new Level($request->getSession());
+            $levelService->addStreak($exercice);
+        }
+        return $pass;
     }
 
 }
