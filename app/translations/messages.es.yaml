@@ -35,3 +35,7 @@ maths:
     name: continuar
     title: Continua desde un número
     explanation: 'Llena los vacíos con los números que siguen desde el mostrado'
+  strategies:
+    name: strategies
+    title: Calculation strategies
+    explanation: 'Do the following operations using the same strategy'

@@ -25,3 +25,7 @@ maths:
     name: continue
     title: Continue from a number
     explanation: 'Fill the gaps with the numbers that continue from the shown'
+  strategies:
+    name: estratégias
+    title: Estratégias de cálculo
+    explanation: 'Haz las operaciones siguiendo la misma estratégia'

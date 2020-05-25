@@ -35,3 +35,7 @@ maths:
     name: continuar
     title: Continua desde un número
     explanation: 'Omple els buits amb els nombres que segueixen del que es mostra'
+  strategies:
+    name: estratègies
+    title: Estratègies de càlcul
+    explanation: 'Fes les operacions seguint la mateixa estratègia'
