@@ -183,6 +183,25 @@ class Level
                     ]
                 ]
             ],
+            [
+                'name' => '4. X+X', 'min' => 1, 'max' => 9, 'num' => 20, 'time' => 60,
+                'strategies' => [
+                    [
+                        'operators' => ['+'],
+                        'operand_same' => true
+                    ]
+                ]
+            ],
+            [
+                'name' => '5. X+X (II)', 'min' => 11, 'max' => 50, 'num' => 20, 'time' => 60,
+                'strategies' => [
+                    [
+                        'operators' => ['+'],
+                        'operand_same' => true
+                    ]
+                ]
+            ],
+
         ];
     }
 }
