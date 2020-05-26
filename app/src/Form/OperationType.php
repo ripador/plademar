@@ -14,6 +14,9 @@ class OperationType extends AbstractType
         $builder
             ->add('operands', CollectionType::class, [
                 'entry_type' => NumberType::class,
+                'entry_options' => [
+                    'attr' => ['readonly' => 'readonly']
+                ],
                 'allow_add' => true
             ])
             ->add('response', NumberType::class) //here they put the response

@@ -133,8 +133,9 @@ class Maths
                 //Limit the second and following operatos to a list given in the strategy param
                 $operands[$i] = $operand_limit[array_rand($operand_limit, 1)];
             } else {
-                $operands[$i] = rand($min, $max) * $operand_multiplier;
+                $operands[$i] = rand($min, $max);
             }
+            $operands[$i] = $operands[$i] * $operand_multiplier;
 
             // APPLY OPERATION
             if ($i == 0) {

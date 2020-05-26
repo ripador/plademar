@@ -137,17 +137,50 @@ class Level
         ];
     }
 
+    /**
+     * getMathsStrategiesLevels.
+     * Definition of strategies exercices.
+     * In the Maths service the operations are generated using the parameters as described here:
+     * min: minimum number for an operand
+     * max: maximum number for an operand
+     * num: number of operations to generate
+     * time: time to complete the exercice
+     * strategies:
+     *   operators: the operators to apply randomly
+     *   operand_multiplier: number to multiply the random generated operator
+     *   operand_limit: list of available operands (except for the first, that's random)
+     *
+     * @return array
+     */
     public function getMathsStrategiesLevels() : array
     {
         return [
-            ['name' => '1. (+/- *0)', 'min' => 0, 'max' => 10, 'num' => 20, 'time' => 60,
+            [
+                'name' => '1. (*0 +/- *0)', 'min' => 0, 'max' => 10, 'num' => 20, 'time' => 60,
                 'strategies' => [
-                    ['operators' => ['+', '-'], 'operand_multiplier' => 10]
+                    [
+                        'operators' => ['+', '-'],
+                        'operand_multiplier' => 10
+                    ]
                 ]
             ],
-            ['name' => '2. (+/- 1|2)', 'min' => 0, 'max' => 99, 'num' => 20, 'time' => 60,
+            [
+                'name' => '2. (+/- 1|2)', 'min' => 0, 'max' => 99, 'num' => 20, 'time' => 60,
                 'strategies' => [
-                    ['operators' => ['+', '-'], 'operand_limit' => [1, 2]]
+                    [
+                        'operators' => ['+', '-'],
+                        'operand_limit' => [1, 2]
+                    ]
+                ]
+            ],
+            [
+                'name' => '3. (*0|5 +/- 5)', 'min' => 0, 'max' => 10, 'num' => 20, 'time' => 60,
+                'strategies' => [
+                    [
+                        'operators' => ['+', '-'],
+                        'operand_multiplier' => 5,
+                        'operand_limit' => [1, 2]
+                    ]
                 ]
             ],
         ];

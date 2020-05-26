@@ -22,10 +22,10 @@
         {% set content %}
           <h2>{% trans %}Maths{% endtrans %}</h2>
           <ul>
-            <li><a href="{{ path('maths_sort') }}">{% trans %}maths.sort.name{% endtrans %}</a></li>
-            <li><a href="{{ path('maths_series') }}">{% trans %}maths.series.name{% endtrans %}</a></li>
-            <li><a href="{{ path('maths_continueFrom') }}">{% trans %}maths.continueFrom.name{% endtrans %}</a></li>
-            <li><a href="{{ path('maths_strategies') }}">{% trans %}maths.strategies.name{% endtrans %}</a></li>
+            <li><a href="{{ path('maths_sort') }}">{{ 'maths.sort.name'|trans|capitalize }}</a></li>
+            <li><a href="{{ path('maths_series') }}">{{ 'maths.series.name'|trans|capitalize }}</a></li>
+            <li><a href="{{ path('maths_continueFrom') }}">{{ 'maths.continueFrom.name'|trans|capitalize }}</a></li>
+            <li><a href="{{ path('maths_strategies') }}">{{ 'maths.strategies.name'|trans|capitalize }}</a></li>
           </ul>
         {% endset %}
         {% include 'common/_portlet.html.twig' %}
