@@ -201,7 +201,16 @@ class Level
                     ]
                 ]
             ],
-
+            [
+                'name' => '6. = *0', 'min' => 1, 'max' => 99, 'num' => 20, 'time' => 60,
+                'strategies' => [
+                    [
+                        'operators' => ['+'],
+                        'result_limit' => [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                        'result_multiplier' => 10
+                    ]
+                ]
+            ],
         ];
     }
 }

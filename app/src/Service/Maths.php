@@ -127,36 +127,47 @@ class Maths
         $operand_multiplier = isset($strategy['operand_multiplier']) ? $strategy['operand_multiplier'] : 1;
         $operand_limit = isset($strategy['operand_limit']) ? $strategy['operand_limit'] : null;
         $operand_same = $strategy['operand_same'] ?? false;
+        $result_limit = $strategy['result_limit'] ?? null;
+        $result_multiplier = $strategy['result_multiplier'] ?? 1;
 
-        for ($i=0; $i<$num_operands; $i++) {
-            //GET OPERAND
-            if ($i > 0 && $operand_limit !== null) {
-                //Limit the second and following operatos to a list given in the strategy param
-                $operands[$i] = $operand_limit[array_rand($operand_limit, 1)];
-            } elseif ($i > 0 && $operand_same) {
-                $operands[$i] = $operands[$i-1];
-            } else {
-                $operands[$i] = rand($min, $max);
-            }
-            $operands[$i] = $operands[$i] * $operand_multiplier;
+        if ($result_limit) {
+            $result_limit = array_map(function ($a) use ($result_multiplier) {
+                return $a * $result_multiplier;
+            }, $result_limit);
+        }
 
-            // APPLY OPERATION
-            if ($i == 0) {
-                // First operand is the operand itself, no operation is applied now
-                $result = $operands[$i];
-            } else {
-                switch ($operator) {
-                    case '+':
-                        $result += $operands[$i];
-                        break;
-                    case '-':
-                        $result -= $operands[$i];
-                        break;
-                    default:
-                        throw new \Exception('Operator not supported');
+        do {
+            for ($i = 0; $i < $num_operands; $i++) {
+                //GET OPERAND
+                if ($i > 0 && $operand_limit !== null) {
+                    //Limit the second and following operatos to a list given in the strategy param
+                    $operands[$i] = $operand_limit[array_rand($operand_limit, 1)];
+                } elseif ($i > 0 && $operand_same) {
+                    $operands[$i] = $operands[$i - 1];
+                } else {
+                    $operands[$i] = rand($min, $max);
+                }
+                $operands[$i] = $operands[$i] * $operand_multiplier;
+
+                // APPLY OPERATION
+                if ($i == 0) {
+                    // First operand is the operand itself, no operation is applied now
+                    $result = $operands[$i];
+                } else {
+                    switch ($operator) {
+                        case '+':
+                            $result += $operands[$i];
+                            break;
+                        case '-':
+                            $result -= $operands[$i];
+                            break;
+                        default:
+                            throw new \Exception('Operator not supported');
+                    }
                 }
             }
-        }
+            /* When the results are limited, the operation is generated untill the result is one of the valid ones */
+        } while ($result_limit === null || !in_array($result, $result_limit));
 
         return [
             'operands' => $operands,
