@@ -48,12 +48,19 @@
     {% endfor %}
   {% endif %}
 
-  {% if pass is defined and pass %}
-    {# If the exercice is completed, disable the form #}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            formDisable('#main_form_container form');
-        });
-    </script>
-  {% endif %}
+  <script type="text/javascript">
+      $(document).ready(function() {
+          {# If the exercice is completed, disable the form #}
+          {% if pass is defined and pass %}
+              formDisable('#main_form_container form');
+          {% endif %}
+
+          {% if levelParams.time is defined %}
+              setTimeout(function() {
+                  $('#main_form_container form div.actions button.btn-primary').click();
+              }, {{ levelParams.time * 1000 }});
+          {% endif %}
+      });
+  </script>
+
 {% endblock %}

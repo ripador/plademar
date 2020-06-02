@@ -233,7 +233,8 @@ class MathsController extends AbstractController
             }
 
         } elseif ($form->isSubmitted() && $form->isValid()) {
-            $levelForm->get('difficult')->setData($levelService->getLevel('strategies'));
+            $d = $levelService->getLevel('strategies');
+            $levelForm->get('difficult')->setData($d);
 
             $pass = $this->validateOperations($request, $form, 'strategies');
         }
@@ -245,6 +246,7 @@ class MathsController extends AbstractController
             'form_generated' => (isset($operations) && $operations != null),
             'pass' => $pass ?? null,
             'streak' => $streak ?? $levelService->getStreak('strategies'),
+            'levelParams' => (isset($levels) && isset($d)) ? $levels[$d] : null,
             'javascripts' => [
                 'operations.js'
             ]

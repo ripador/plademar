@@ -167,7 +167,7 @@ class Maths
                 }
             }
             /* When the results are limited, the operation is generated untill the result is one of the valid ones */
-        } while ($result_limit === null || !in_array($result, $result_limit));
+        } while ($result_limit !== null && !in_array($result, $result_limit));
 
         return [
             'operands' => $operands,
