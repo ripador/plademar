@@ -5,6 +5,7 @@ use App\Form\LevelType;
 use App\Form\OperationsType;
 use App\Form\SerieType;
 use App\Service\Level;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -236,7 +237,7 @@ class MathsController extends AbstractController
             $d = $levelService->getLevel('strategies');
             $levelForm->get('difficult')->setData($d);
 
-            $pass = $this->validateOperations($request, $form, 'strategies');
+            list($passes, $checks) = $this->validateOperations($request, $form, 'strategies');
         }
 
         return $this->render('maths/default.html.twig', [
@@ -244,7 +245,9 @@ class MathsController extends AbstractController
             'levelForm' => $levelForm->createView(),
             'form' => isset($form) ? $form->createView() : null,
             'form_generated' => (isset($operations) && $operations != null),
-            'pass' => $pass ?? null,
+            'pass' => (isset($passes) && isset($checks)) ? ($passes == $checks) : null,
+            'passes' => $passes ?? null,
+            'checks' => $checks ?? null,
             'streak' => $streak ?? $levelService->getStreak('strategies'),
             'levelParams' => (isset($levels) && isset($d)) ? $levels[$d] : null,
             'javascripts' => [
@@ -258,24 +261,28 @@ class MathsController extends AbstractController
      *
      * @param Request $request
      * @param \Symfony\Component\Form\FormInterface $form
-     * @return bool
+     * @param string $exercice
+     * @return array
      */
     private function validateOperations(Request $request, $form, $exercice)
     {
-        $pass = true;
+        $checks = $passes = 0;
         $operations = $form->get('operations')->getData();
-        foreach ($operations as $operation) {
+        foreach ($operations as $i => $operation) {
+            $checks++;
             if ((float) $operation['result'] != (float) $operation['response']) {
                 $pass = false;
-                break;
+                $form->get('operations')[$i]->get('response')->addError(new FormError('lol'));
+            } else {
+                $passes++;
             }
         }
 
-        if ($pass) {
+        if ($checks == $passes) {
             $levelService = new Level($request->getSession());
             $levelService->addStreak($exercice);
         }
-        return $pass;
+        return [$passes, $checks];
     }
 
 }

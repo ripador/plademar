@@ -19,7 +19,7 @@ class OperationType extends AbstractType
                 ],
                 'allow_add' => true
             ])
-            ->add('response', NumberType::class) //here they put the response
+            ->add('response', NumberType::class, ['required' => false]) //here they put the response
             ->add('operator', HiddenType::class)
             ->add('result', HiddenType::class) //this is the correct result of the operation
         ;

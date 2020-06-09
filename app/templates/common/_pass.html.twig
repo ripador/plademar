@@ -19,7 +19,7 @@
     {% include 'default/_response.html.twig' with {
       id: 'ko',
       level: 'alert-danger',
-      message: 'resolve.ko'|trans
+      message: passes ~ '/' ~ checks ~ ': ' ~ ('resolve.ko'|trans)
     } %}
 
   {% endif %}
