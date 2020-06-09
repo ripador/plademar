@@ -21,3 +21,19 @@
   </div>
 
 {% endblock %}
+
+{% block operations_widget %}
+  <div class="operations">
+    <div class="row">
+
+      {% set j = 0 %}
+      {% for operation in form.operations %}
+        <div class="col-md-4">
+          {{ form_widget(operation) }}
+          {% set j = j +1 %}
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+{% endblock %}

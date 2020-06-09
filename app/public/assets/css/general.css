@@ -32,3 +32,6 @@ form[name="operations"] #operations_operations div.form-group div.row div.col-sm
     padding: 5px 0 0 0;
     text-align: center;
 }
+div.operations div.row div.col-md-4 {
+    border-right: 1px solid #7c8ea3;
+}
