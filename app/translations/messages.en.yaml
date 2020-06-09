@@ -29,3 +29,10 @@ maths:
     name: estratégias
     title: Estratégias de cálculo
     explanation: 'Haz las operaciones siguiendo la misma estratégia'
+    levels:
+      tens: Sums and substracts of ten
+      2: Sums and substractos of 1 or 2
+      5: Operations with 5 and his multiples
+      doubles: Doubles
+      doubles2: Doubles (II)
+      eq10: Operations with result 10*

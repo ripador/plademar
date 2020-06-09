@@ -39,3 +39,10 @@ maths:
     name: estratègies
     title: Estratègies de càlcul
     explanation: 'Fes les operacions seguint la mateixa estratègia'
+    levels:
+      tens: Sumes i restes de desenes
+      2: Sumes i restes de 1 o 2
+      5: Sumes i restes de 5 amb els seus múltiples
+      doubles: Dobles
+      doubles2: Dobles (II)
+      eq10: Sumes i restes que donen 10*

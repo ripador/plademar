@@ -39,3 +39,10 @@ maths:
     name: strategies
     title: Calculation strategies
     explanation: 'Do the following operations using the same strategy'
+    levels:
+      tens: Sumas y restas de decenas
+      2: Sumas y restas de 1 o 2
+      5: Sumas y restas de 5 con sus múltiplos
+      doubles: Dobles
+      doubles2: Dobles (II)
+      eq10: Sumas y restas que dan 10*

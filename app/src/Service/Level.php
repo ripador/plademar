@@ -156,7 +156,7 @@ class Level
     {
         return [
             [
-                'name' => '1. (*0 +/- *0)', 'min' => 0, 'max' => 10, 'num' => 20, 'time' => 60,
+                'name' => 'maths.strategies.levels.tens', 'min' => 0, 'max' => 10, 'num' => 20, 'time' => 60,
                 'strategies' => [
                     [
                         'operators' => ['+', '-'],
@@ -165,7 +165,7 @@ class Level
                 ]
             ],
             [
-                'name' => '2. (+/- 1|2)', 'min' => 0, 'max' => 99, 'num' => 20, 'time' => 60,
+                'name' => 'maths.strategies.levels.2', 'min' => 0, 'max' => 99, 'num' => 20, 'time' => 60,
                 'strategies' => [
                     [
                         'operators' => ['+', '-'],
@@ -174,7 +174,7 @@ class Level
                 ]
             ],
             [
-                'name' => '3. (*0|5 +/- 5)', 'min' => 0, 'max' => 10, 'num' => 20, 'time' => 60,
+                'name' => 'maths.strategies.levels.5', 'min' => 0, 'max' => 10, 'num' => 20, 'time' => 60,
                 'strategies' => [
                     [
                         'operators' => ['+', '-'],
@@ -184,7 +184,7 @@ class Level
                 ]
             ],
             [
-                'name' => '4. X+X', 'min' => 1, 'max' => 9, 'num' => 20, 'time' => 60,
+                'name' => 'maths.strategies.levels.doubles', 'min' => 1, 'max' => 9, 'num' => 20, 'time' => 60,
                 'strategies' => [
                     [
                         'operators' => ['+'],
@@ -193,7 +193,7 @@ class Level
                 ]
             ],
             [
-                'name' => '5. X+X (II)', 'min' => 11, 'max' => 50, 'num' => 20, 'time' => 60,
+                'name' => 'maths.strategies.levels.doubles2', 'min' => 11, 'max' => 50, 'num' => 20, 'time' => 60,
                 'strategies' => [
                     [
                         'operators' => ['+'],
@@ -202,7 +202,7 @@ class Level
                 ]
             ],
             [
-                'name' => '6. = *0', 'min' => 1, 'max' => 99, 'num' => 20, 'time' => 60,
+                'name' => 'maths.strategies.levels.eq10', 'min' => 1, 'max' => 99, 'num' => 20, 'time' => 60,
                 'strategies' => [
                     [
                         'operators' => ['+'],
