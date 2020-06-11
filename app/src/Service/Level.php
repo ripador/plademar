@@ -102,6 +102,14 @@ class Level
         ];
     }
 
+    /**
+     * lenght: how many items has the serie
+     * gaps: number of blank spaces to fill
+     * lowest: minimum for initial value
+     * highest: maximum for initial value
+     * steps: possible values for addition or substraction
+     * @return array
+     */
     public function getMathsSeriesLevels() : array
     {
         return [

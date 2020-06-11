@@ -33,17 +33,30 @@ class Maths
     /**
      * generateSerie.
      *
-     * @param int $ini Initial number
+     * @param int $min Min initial value
+     * @param int $max Max initial value
      * @param int $len Length of the serie
      * @param int $step Number to add in each iteration
      * @return array
      */
-    public static function generateSerie($ini, $len, $step) : array
+    public static function generateSerie($min, $max, $len, $step) : array
     {
+        $operators = ['+', '-'];
+        $operator = array_rand($operators, 1);
+        $operator = $operators[$operator];
+
+        do {
+            $ini = rand($min, $max);
+        } while ($operator == '-' && $ini < $len * $step); //avoid negative results
+
         $serie = [];
         $num = $ini;
         while (count($serie) < $len) {
-            $num+=$step;
+            if ($operator == '+') {
+                $num+=$step;
+            } elseif ($operator == '-') {
+                $num-=$step;
+            }
             $serie[] = $num;
         }
 

@@ -67,11 +67,8 @@ class MathsController extends AbstractController
             $d = $levelForm->getData()['difficult'];
             $levelService->setLevel('series', $d);
 
-            $ini = rand($levels[$d]['lowest'], $levels[$d]['highest']);
-            $length = $levels[$d]['length'];
             $step = array_rand($levels[$d]['steps']);
-
-            $serie = Maths::generateSerie($ini, $length, $levels[$d]['steps'][$step]);
+            $serie = Maths::generateSerie($levels[$d]['lowest'], $levels[$d]['highest'], $levels[$d]['length'], $levels[$d]['steps'][$step]);
             $gaps = Maths::generateGaps($serie, $levels[$d]['gaps']);
 
             $list = [];
