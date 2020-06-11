@@ -129,6 +129,7 @@ class Maths
         $operand_same = $strategy['operand_same'] ?? false;
         $result_limit = $strategy['result_limit'] ?? null;
         $result_multiplier = $strategy['result_multiplier'] ?? 1;
+        $result_negative = $strategy['result_negative'] ?? false; //let the result be negative or not
 
         if ($result_limit) {
             $result_limit = array_map(function ($a) use ($result_multiplier) {
@@ -167,7 +168,10 @@ class Maths
                 }
             }
             /* When the results are limited, the operation is generated untill the result is one of the valid ones */
-        } while ($result_limit !== null && !in_array($result, $result_limit));
+        } while (
+            ($result < 0 || $result_negative) ||
+            ($result_limit !== null && !in_array($result, $result_limit))
+        );
 
         return [
             'operands' => $operands,
