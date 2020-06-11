@@ -2,42 +2,55 @@
 
 {% block title %}{{ (messages_key ~ '.title')|trans|capitalize }}{% endblock %}
 
+{% block main_attrs %}
+  style="background-image: url('{{ asset('assets/images/' ~ messages_key ~ '.jpg') }}');"
+{% endblock %}
+
 {% block body %}
   <div class="container">
 
-    {# Breadcrumb #}
-    {% include 'default/_breadcrumb.html.twig' with {
-      links: {
-        ('Home'|trans): path('homepage'),
-        ('Maths'|trans|capitalize): '#',
-      },
-      active: (messages_key ~ '.name')|trans|capitalize
-    } %}
+    <div class="row">
+      <div class="col-md">
 
-    {% include 'maths/_level_form.html.twig' with { 'form': levelForm } %}
+        {% set content %}
+          {# Breadcrumb #}
+          {% include 'default/_breadcrumb.html.twig' with {
+            links: {
+              ('Home'|trans): path('homepage'),
+              ('Maths'|trans|capitalize): '#',
+            },
+            active: (messages_key ~ '.name')|trans|capitalize
+          } %}
 
-    {% if form_generated or pass is not same as(null) %}
-      <div id="main_form_container" class="row">
-        <div class="col">
+          {% include 'maths/_level_form.html.twig' with { 'form': levelForm } %}
 
-          <p>{{ (messages_key ~ '.explanation')|trans }}</p>
+          {% if form_generated or pass is not same as(null) %}
+            <div id="main_form_container" class="row">
+              <div class="col">
 
-          {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
-          {{ form_start(form) }}
-          {{ form_widget(form) }}
+                <p>{{ (messages_key ~ '.explanation')|trans }}</p>
 
-          <div class="actions">
-            <button type="submit" class="btn btn-primary">{{ 'resolve.check'|trans|capitalize }}</button>
-          </div>
+                {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
 
-          {{ form_end(form) }}
+                <div class="actions">
+                  <button type="submit" class="btn btn-primary">{{ 'resolve.check'|trans|capitalize }}</button>
+                </div>
 
-        </div>
+                {{ form_end(form) }}
+
+              </div>
+            </div>
+
+            {% include 'common/_pass.html.twig' %}
+
+          {% endif %}
+        {% endset %}
+        {% include 'common/_portlet.html.twig' %}
+
       </div>
-
-      {% include 'common/_pass.html.twig' %}
-
-    {% endif %}
+    </div>
   </div>
 {% endblock %}
 

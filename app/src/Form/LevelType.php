@@ -10,7 +10,7 @@ class LevelType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $choices = $number_array = [];
+        $choices = [];
         foreach ($options['levels'] as $k => $data) {
             $choices[$data['name']] = $k;
         }
