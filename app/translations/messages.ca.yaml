@@ -21,6 +21,7 @@ resolve:
   ok: 'Molt bé'
   ko: 'Torna a probar'
   change_level: 'Hauries de passar al següent nivell'
+  reload: "S'està carregant un nou exercici"
 
 maths:
   sort:

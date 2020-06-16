@@ -21,6 +21,7 @@ resolve:
   ok: 'Muy bien'
   ko: 'Inténtalo de nuevo'
   change_level: 'Deberias pasar al siguiente nivel'
+  reload: "Se está cargando un nuevo ejercicio"
 
 maths:
   sort:

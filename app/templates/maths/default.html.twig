@@ -22,6 +22,8 @@
             active: (messages_key ~ '.name')|trans|capitalize
           } %}
 
+          {% include 'common/_pass.html.twig' %}
+
           {% include 'maths/_level_form.html.twig' with { 'form': levelForm } %}
 
           {% if form_generated or pass is not same as(null) %}
@@ -42,8 +44,6 @@
 
               </div>
             </div>
-
-            {% include 'common/_pass.html.twig' %}
 
           {% endif %}
         {% endset %}
@@ -66,6 +66,14 @@
           {# If the exercice is completed, disable the form #}
           {% if pass is defined and pass %}
               formDisable('#main_form_container form');
+
+              {# When the change is not necessary, reload with a new exercise #}
+              {% if streak < 4 %}
+                  $('#modalReload').modal();
+                  setTimeout(function() {
+                      $('form[name="level"] div.actions button.btn-secondary').click();
+                  }, {{ 3000 }});
+              {% endif %}
 
           {% else %}
               {% if levelParams.time is defined %}
