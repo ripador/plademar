@@ -1,28 +1,42 @@
-{% if pass is not same as(null) %}
+<div class="row">
 
-  {% if pass %}
-    {% include 'default/_response.html.twig' with {
-      id: 'ok',
-      level: 'alert-success',
-      message: 'resolve.ok'|trans
-    } %}
+  <div class="col-md-10">
+    {% if pass is not same as(null) %}
 
-    {% if streak >= 4 %}
-      {% include 'default/_response.html.twig' with {
-        id: 'change_level',
-        level: 'alert-warning',
-        message: 'resolve.change_level'|trans
-      } %}
+      {% if pass %}
+        {% include 'default/_response.html.twig' with {
+          id: 'ok',
+          level: 'alert-success',
+          message: 'resolve.ok'|trans
+        } %}
+
+        {% if streak >= 4 %}
+          {% include 'default/_response.html.twig' with {
+            id: 'change_level',
+            level: 'alert-warning',
+            message: 'resolve.change_level'|trans
+          } %}
+        {% else %}
+          {% include 'common/_modal.html.twig' with {
+            id: 'modalReload',
+            title: 'resolve.ok'|trans,
+            content: 'resolve.reload'|trans
+          } %}
+        {% endif %}
+
+      {% else %}
+        {% include 'default/_response.html.twig' with {
+          id: 'ko',
+          level: 'alert-danger',
+          message: passes ~ '/' ~ checks ~ ': ' ~ ('resolve.ko'|trans)
+        } %}
+
+      {% endif %}
     {% endif %}
+  </div>
 
-  {% else %}
-    {% include 'default/_response.html.twig' with {
-      id: 'ko',
-      level: 'alert-danger',
-      message: passes ~ '/' ~ checks ~ ': ' ~ ('resolve.ko'|trans)
-    } %}
+  <div class="col-md-2 alert alert-info">
+    {% trans %}Streak{% endtrans %}: {{ streak }}
+  </div>
 
-  {% endif %}
-{% endif %}
-
-<p>{% trans %}Streak{% endtrans %}: {{ streak }}</p>
+</div>
