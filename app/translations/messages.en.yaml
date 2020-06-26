@@ -5,6 +5,7 @@ Languages: Languages
 Maths: Maths
 Play: Play
 Streak: Streak
+'Difficulty level': Difficulty level
 
 resolve:
   check: check
