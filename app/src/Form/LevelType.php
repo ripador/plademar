@@ -17,7 +17,7 @@ class LevelType extends AbstractType
 
         $builder
             ->add('difficult', ChoiceType::class, [
-                'label'   => 'Difficulty level',
+                'label'   => 'Level',
                 'choices' => $choices
             ])
         ;
