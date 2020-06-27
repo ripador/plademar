@@ -15,18 +15,18 @@
         <h5 class="text-uppercase">Links</h5>
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
+            <a href="{{ path('disclaimer') }}">{% trans %}Disclaimer{% endtrans %}</a>
           </li>
         </ul>
       </div>
 
+      {#
       <div class="col-md-3 mb-md-0 mb-3">
         <h5 class="text-uppercase">Links</h5>
         <ul class="list-unstyled">
           <li>
-            <a href="#!">{% trans %}Disclaimer{% endtrans %}</a>
+            <a href="{{ path('disclaimer') }}">{% trans %}Disclaimer{% endtrans %}</a>
           </li>
-          {#
           <li>
             <a href="#!">Link 2</a>
           </li>
@@ -36,9 +36,9 @@
           <li>
             <a href="#!">Link 4</a>
           </li>
-          #}
         </ul>
       </div>
+    #}
 
     </div> {# end row #}
 
@@ -47,7 +47,7 @@
 
   <div class="footer-copyright text-center py-3">
     {% trans %}Created by{% endtrans %}:
-    <a href="https://github.com/ripador"> Sergi Argerich</a> |
+    <a href="https://github.com/ripador" target="_blank"> Sergi Argerich</a> |
     Benjamí Pena
   </div>
 

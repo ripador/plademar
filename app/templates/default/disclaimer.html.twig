@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block main_attrs %}
+  style="background-image: url('{{ asset('assets/images/school-times-3599175_1920.jpg') }}');"
+{% endblock %}
+
+{% block body %}
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md">
+      {% set content %}
+        <h1>{% trans %}Disclaimer{% endtrans %}</h1>
+        <p>{% trans %}This is a free online tool designed to help primary school students advance in many areas.{% endtrans %}</p>
+
+      {% endset %}
+      {% include 'common/_portlet.html.twig' %}
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
