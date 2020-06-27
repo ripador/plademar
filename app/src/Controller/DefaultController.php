@@ -16,8 +16,21 @@ class DefaultController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         return $this->render('default/index.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+    /**
+     * @Route("/disclaimer", name="disclaimer")
+     * @param Request $request
+     * @return Response
+     */
+    public function disclaimer(Request $request)
+    {
+        return $this->render('default/disclaimer.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
         ]);
     }
