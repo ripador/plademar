@@ -153,13 +153,22 @@ class Maths
         do {
             for ($i = 0; $i < $num_operands; $i++) {
                 //GET OPERAND
-                if ($i > 0 && $operand_limit !== null) {
-                    //Limit the second and following operatos to a list given in the strategy param
-                    $operands[$i] = $operand_limit[array_rand($operand_limit, 1)];
-                } elseif ($i > 0 && $operand_same) {
+                if ($i > 0 && $operand_same) {
                     $operands[$i] = $operands[$i - 1];
                 } else {
-                    $operands[$i] = rand($min, $max);
+                    if ($operand_limit !== null &&
+                        (
+                            (isset($operand_limit['let_free']) && !in_array($i, $operand_limit['let_free'])) ||
+                            !isset($operand_limit['let_free'])
+                        )
+                    ) {
+                        $operand_limit_list = $operand_limit['list'];
+                        //Limit the second and following operands to a list given in the strategy param
+                        $operands[$i] = $operand_limit_list[array_rand($operand_limit_list, 1)];
+
+                    } else {
+                        $operands[$i] = rand($min, $max);
+                    }
                 }
                 $operands[$i] = $operands[$i] * $operand_multiplier;
 

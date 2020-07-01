@@ -156,7 +156,10 @@ class Level
      * strategies:
      *   operators: the operators to apply randomly
      *   operand_multiplier: number to multiply the random generated operator
-     *   operand_limit: list of available operands (except for the first, that's random)
+     *   operand_limit: list of available operands and options
+     *     list: the available operands
+     *     let_free: the index where the limit does NOT apply. Ex: let_free => [0] willnot apply restrictions to first operand
+     *   operand_same: if true force the operands of the operation to be equal
      *
      * @return array
      */
@@ -177,7 +180,10 @@ class Level
                 'strategies' => [
                     [
                         'operators' => ['+', '-'],
-                        'operand_limit' => [1, 2]
+                        'operand_limit' => [
+                            'list' => [1, 2],
+                            'let_free' => [0],
+                        ]
                     ]
                 ]
             ],
@@ -187,7 +193,10 @@ class Level
                     [
                         'operators' => ['+', '-'],
                         'operand_multiplier' => 5,
-                        'operand_limit' => [1, 2]
+                        'operand_limit' => [
+                            'list' => [1, 2],
+                            'let_free' => [0],
+                        ]
                     ]
                 ]
             ],
@@ -202,6 +211,24 @@ class Level
             ],
             [
                 'name' => 'maths.strategies.levels.doubles2', 'min' => 11, 'max' => 50, 'num' => 20, 'time' => 120,
+                'strategies' => [
+                    [
+                        'operators' => ['+'],
+                        'operand_same' => true,
+                        'operand_limit' => [
+                            'list' => [
+                                0, 1, 2, 3, 4,
+                                10, 11, 12, 13, 14,
+                                20, 21, 22, 23, 24,
+                                30, 31, 32, 33, 34,
+                                40, 41, 42, 43, 44,
+                            ],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'name' => 'maths.strategies.levels.doubles3', 'min' => 11, 'max' => 50, 'num' => 20, 'time' => 120,
                 'strategies' => [
                     [
                         'operators' => ['+'],
