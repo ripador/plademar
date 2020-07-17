@@ -17,6 +17,12 @@ Hello: Hola
 Streak: Ratxa
 Series: Series
 'This is a free online tool designed to help primary school students advance in many areas.': "Aquesta es una eina en línea i lliure, per ajudar als alumnes de primaria en diferents àrees d'aprenentatge."
+'Created by': Creat per
+Disclaimer: Avís
+
+home:
+  presentation: "Benvinguts a la web que us convertirà en una calculadora humana."
+  howto: "Escull l'exercici que vols treballar, la dificultat y comença! T'anirem dient si ho fas bé, i si cal que pugis de nivell."
 
 resolve:
   check: comprobar

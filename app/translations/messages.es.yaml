@@ -17,6 +17,12 @@ Reset: Reiniciar
 Streak: Racha
 Hello: Hola
 'This is a free online tool designed to help primary school students advance in many areas.': "Esta es una herramienta libre online, creada para ayudar a los estudiantes de primaria en diversas áreas."
+'Created by': Creado por
+Disclaimer: Aviso
+
+home:
+  presentation: "Bienvenidos a la página que os convertirá en una calculadora humana."
+  howto: "Escoge el ejercicio que quieras, la dificultad ¡y comienza! Te iremos diciendo si lo haces bien, y cuándo deberías subir de nivel."
 
 resolve:
   check: comprobar
@@ -39,9 +45,9 @@ maths:
     title: Continua desde un número
     explanation: 'Llena los vacíos con los números que siguen desde el mostrado'
   strategies:
-    name: strategies
-    title: Calculation strategies
-    explanation: 'Do the following operations using the same strategy'
+    name: estratégias
+    title: Estratégias de cálculo
+    explanation: 'Haz las operaciones siguiendo la misma estratégia'
     levels:
       tens: Sumas y restas de decenas
       2: Sumas y restas de 1 o 2

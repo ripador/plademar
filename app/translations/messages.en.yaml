@@ -7,6 +7,12 @@ Maths: Maths
 Play: Play
 Streak: Streak
 'Difficulty level': Difficulty level
+'Created by': Created by
+Disclaimer: Disclaimer
+
+home:
+  presentation: "Wellcome to the site that will make you a human calculator."
+  howto: "Choose the exercice that you want, the difficulty and start! We'll tell you if you doing it right, and when you must change level."
 
 resolve:
   check: check
@@ -29,9 +35,9 @@ maths:
     title: Continue from a number
     explanation: 'Fill the gaps with the numbers that continue from the shown'
   strategies:
-    name: estratégias
-    title: Estratégias de cálculo
-    explanation: 'Haz las operaciones siguiendo la misma estratégia'
+    name: strategies
+    title: Calculation strategies
+    explanation: 'Do the following operations using the same strategy'
     levels:
       tens: Sums and substracts of ten
       2: Sums and substractos of 1 or 2
