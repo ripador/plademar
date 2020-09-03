@@ -1,4 +1,4 @@
-# TK LAP (Linux Apache PHP)
+# plademar base LAP (Linux Apache PHP)
 FROM ubuntu:18.04
 
 MAINTAINER Sergi<sergi.argerich@gmail.com>
