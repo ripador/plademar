@@ -282,4 +282,50 @@ class MathsController extends AbstractController
         return [$passes, $checks];
     }
 
+    /**
+     * tables.
+     * Use the OperationsType form.
+     *
+     * @Route("/tables", name="maths_tables")
+     * @param Request $request
+     * @return Response
+     */
+    public function tables(Request $request)
+    {
+        $levelService = new Level($request->getSession());
+        list($levelForm, $levels) = $this->createLevelForm($request, 'tables');
+
+        $form = $this->createForm(OperationsType::class);
+        $form->handleRequest($request);
+
+        if ($levelForm->isSubmitted() && $levelForm->isValid()) {
+            // Generate the numeric serie based on the selected level
+            $d = $levelForm->getData()['difficult'];
+            $levelService->setLevel('tables', $d);
+
+            $operations = Maths::generateTables($levels[$d]['tables'], $levels[$d]['till'], $levels[$d]['max_ops']);
+            $form = $this->createForm(OperationsType::class, ['operations' => $operations]);
+
+        } elseif ($form->isSubmitted() && $form->isValid()) {
+            $d = $levelService->getLevel('tables');
+            $levelForm->get('difficult')->setData($d);
+
+            list($passes, $checks) = $this->validateOperations($request, $form, 'tables');
+        }
+
+        return $this->render('maths/default.html.twig', [
+            'messages_key' => 'maths.tables',
+            'levelForm' => $levelForm->createView(),
+            'form' => isset($form) ? $form->createView() : null,
+            'form_generated' => (isset($operations) && $operations != null),
+            'pass' => (isset($passes) && isset($checks)) ? ($passes == $checks) : null,
+            'passes' => $passes ?? null,
+            'checks' => $checks ?? null,
+            'streak' => $streak ?? $levelService->getStreak('tables'),
+            'levelParams' => (isset($levels) && isset($d)) ? $levels[$d] : null,
+            'javascripts' => [
+                'operations.js'
+            ]
+        ]);
+    }
 }

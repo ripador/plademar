@@ -248,4 +248,27 @@ class Level
             ],
         ];
     }
+
+    /**
+     * getMathsTablesLevels.
+     *
+     * @return array
+     */
+    public function getMathsTablesLevels(): array
+    {
+        return [
+            [
+                'name' => '1',
+                'tables' => [1, 3, 5],
+                'till' => 5,
+                'max_ops' => 9,
+            ],
+            [
+                'name' => '2',
+                'tables' => [1, 3, 5, 10],
+                'till' => 10,
+                'max_ops' => 15,
+            ]
+        ];
+    }
 }

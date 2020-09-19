@@ -56,3 +56,7 @@ maths:
       doubles2: Dobles (II)
       doubles3: Dobles (III)
       eq10: Sumas y restas que dan 10*
+  tables:
+    name: tablas
+    title: Tablas de multiplicar
+    explanation: 'Pon los resultados de las tablas'

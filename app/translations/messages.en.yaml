@@ -46,3 +46,7 @@ maths:
       doubles2: Doubles (II)
       doubles3: Doubles (III)
       eq10: Operations with result 10*
+  tables:
+    name: tables
+    title: Times tables
+    explanation: 'Fill the results for the X times tables'

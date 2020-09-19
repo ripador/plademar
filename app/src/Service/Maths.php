@@ -184,6 +184,9 @@ class Maths
                         case '-':
                             $result -= $operands[$i];
                             break;
+//                        case '*':
+//                            $result *= $operands[$i];
+//                            break;
                         default:
                             throw new \Exception('Operator not supported');
                     }
@@ -220,6 +223,37 @@ class Maths
         for ($i=0; $i<$num; $i++) {
             $strategy = $strategies[array_rand($strategies, 1)];
             $operations[$i] = self::generateOperation($min, $max, $strategy);
+        }
+
+        return $operations;
+    }
+
+    /**
+     * generateTables.
+     *
+     * @param array $tables List of the tables to get
+     * @param int $till Highest number of each table
+     * @param int $maxOps Max num of operations, if null there's no limit
+     * @return array
+     */
+    public static function generateTables($tables, $till, $maxOps = null)
+    {
+        $operations = [];
+        foreach ($tables as $t) {
+            for ($i=1; $i<=$till; $i++) {
+                $operation = [
+                    'operands' => [$t, $i],
+                    'operator' => '*',
+                    'result' => ($t * $i),
+                    'response' => null,
+                ];
+                $operations[] = $operation;
+            }
+        }
+        shuffle($operations);
+
+        if (is_int($maxOps) && $maxOps > 0) {
+            $operations = array_slice($operations, 0, $maxOps);
         }
 
         return $operations;

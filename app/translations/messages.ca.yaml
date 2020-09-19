@@ -56,3 +56,7 @@ maths:
       doubles2: Dobles (II)
       doubles3: Dobles (III)
       eq10: Sumes i restes que donen 10*
+  tables:
+    name: taules
+    title: Taules de multiplicar
+    explanation: 'Posa els resultats de les taules'
