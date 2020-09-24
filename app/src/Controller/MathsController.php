@@ -71,6 +71,7 @@ class MathsController extends AbstractController
             $serie = Maths::generateSerie($levels[$d]['lowest'], $levels[$d]['highest'], $levels[$d]['length'], $levels[$d]['steps'][$step]);
             $gaps = Maths::generateGaps($serie, $levels[$d]['gaps']);
 
+            // Remove the values from the gaps
             $list = [];
             foreach ($serie as $k => $v) {
                 $list[$k] = array_key_exists($k, $gaps) ? null : $v;
@@ -93,7 +94,12 @@ class MathsController extends AbstractController
             'form' => isset($form) ? $form->createView() : null,
             'form_generated' => (isset($serie) && $serie != null),
             'pass' => $pass ?? null,
+            'passes' => null,
+            'checks' => null,
             'streak' => $streak ?? $levelService->getStreak('series'),
+            'javascripts' => [
+                'series.js'
+            ]
         ]);
     }
 
