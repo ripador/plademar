@@ -27,7 +27,7 @@ maths:
     title: 'Sort the numbers'
     explanation: 'Ordena els nombres de més petit a més gran'
   series:
-    name: Series
+    name: series
     title: Complete the numeric series
     explanation: 'Fill the blank gaps with the numbers to complete the serie'
   continueFrom:
