@@ -15,7 +15,7 @@ class OperationType extends AbstractType
             ->add('operands', CollectionType::class, [
                 'entry_type' => NumberType::class,
                 'entry_options' => [
-                    'attr' => ['readonly' => 'readonly']
+                    'attr' => ['readonly' => 'readonly', 'tabindex' => '-1']
                 ],
                 'allow_add' => true
             ])
